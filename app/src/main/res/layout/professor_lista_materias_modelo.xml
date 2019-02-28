@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/disciplina"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rede de Computadores II"
+            android:textColor="@color/colorText"
+            android:textStyle="normal|bold"
+            android:textSize="18dp"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/curso"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Técnico em Manutenção e Suporte em Informática"
+            android:textSize="15dp"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/turma"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2011.1"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

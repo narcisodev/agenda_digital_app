@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#0ec111</color>
+    <color name="colorPrimaryDark">#13c710</color>
+<!--
+    <color name="colorPrimary">#20accf</color>
+    <color name="colorPrimaryDark">#35bddf</color>
+    -->
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="darkergray">#c8c9c9</color>
+    <color name="white">#fff</color>
+    <color name="colorText">#767575</color>
+    <color name="colorAccent">#20dae7</color>
+    <color name="grayligth">#f2f2f2</color>
+    <color name="orange">#ff5500</color>
+
+
+    <color name="background_grey">#fff</color>
+    <color name="primary_text">#000</color>
+    <color name="secondary_text">#000</color>
+    <color name="secondary_color">#0989</color>
+    <color name="cor_data">#07c64c</color>
+    <color name="materia1">#f501fd94</color>
+    <color name="materia2">#f501b1fd</color>
+    <color name="primary_text_l">#282727</color>
+
+    <!--
+    <color name="colorPrimary">#ffc107</color>
+
+    <color name="colorPrimaryDark">#ffa000</color>
+    <color name="backgroundcolor">#fcfcfc</color>
+    <color name="lightgray">#ededed</color>
+    <color name="deeppurple">#7c4dff</color>
+    <color name="yello">#ffb300</color>
+    <color name="green">#00bfa5</color>
+    <color name="darkergray">#c8c9c9</color>
+    <color name="white">#fff</color>
+    <color name="colorText">#767575</color>
+    <color name="colorAccent">#dc6e1a</color>
+    -->
+</resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/data_entrega"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="20/04/1999"
+            android:textStyle="bold"
+            android:textSize="15dp"
+            android:textColor="@color/colorPrimary"/>
+
+        <TextView
+            android:id="@+id/titulo_atividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Exercício Avaliativo"
+            android:textColor="@color/colorText"
+            android:textStyle="normal|bold"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/disciplina_atividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Banco de Dados e Susas Tecnologias"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <ImageView
+        android:id="@+id/cor_materia"
+        android:layout_width="20dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        >
+
+
+    </ImageView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/materia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Manutenção de Computadores"
+            android:textColor="@color/colorText"
+            android:textStyle="normal|bold"
+            android:textSize="21dp"/>
+
+
+        <TextView
+            android:layout_marginTop="1dp"
+            android:id="@+id/professor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Professor Fabrício Ribeiro"
+            android:textSize="15dp"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.narcisogomes.myapplication">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/agendadigital"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/agendadigital"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".aluno.TelaAluno"
+            android:label="@string/title_activity_tela_aluno"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".util.Login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".aluno.ListaAitividades" />
+        <activity android:name=".aluno.TelaDescAtividade" />
+        <activity
+            android:name=".professor.TelaProfessor"
+            android:label="@string/title_activity_tela_professor" />
+        <activity android:name=".professor.TelaCadTarefas" />
+        <activity android:name=".professor.ListaMaterias" />
+        <activity android:name=".professor.TelaDescAtv" />
+        <activity
+            android:name=".responsavel.TelaResp"
+            android:label="@string/title_activity_tela_resp" />
+
+        <meta-data
+            android:name="com.google.android.actions"
+            android:resource="@xml/searchable_prof" />
+
+        <activity android:name=".responsavel.DescAluno" />
+        <activity android:name=".util.SobreAct" />
+        <activity
+            android:name=".pedagogico.TelaPedagogico"
+            android:label="@string/title_activity_tela_pedagogico" />
+        <activity android:name=".professor.TelaEditAtividade" />
+        <activity android:name=".aluno.TelaTodasAtividades"></activity>
+    </application>
+
+</manifest>

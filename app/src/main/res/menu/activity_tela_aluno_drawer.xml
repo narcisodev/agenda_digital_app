@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/home" />
+        <item
+            android:id="@+id/nav_atv_aula"
+            android:icon="@drawable/ic_local_library_24dp"
+            android:title="@string/atividades_de_aula" />
+        <item
+            android:id="@+id/nav_rel_acad"
+            android:icon="@drawable/ic_school_24dp"
+            android:title="@string/relatorio_academico" />
+        <item
+            android:id="@+id/nav_consul_notas"
+            android:icon="@drawable/ic_attach_file_black_24dp"
+            android:title="@string/consultar_notas" />
+        <item
+            android:id="@+id/nav_consul_faltas"
+            android:icon="@drawable/ic_assignment_24dp"
+            android:title="@string/consultar_faltas" />
+    </group>
+
+    <item android:title="Compartilhe">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Send" />
+        </menu>
+    </item>
+
+    <item android:title="Saiba mais">
+        <menu>
+            <item
+                android:id="@+id/sobre"
+                android:icon="@drawable/ic_help_24dp"
+                android:title="Sobre" />
+        </menu>
+    </item>
+
+</menu>

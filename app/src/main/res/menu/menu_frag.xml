@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_logoff"
+        android:orderInCategory="100"
+        android:title="@string/logoff"
+        android:icon="@drawable/ic_exit_to_app_24dp"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_listar_tarefas"
+        android:title="Por tarefas"
+        android:visible="false"
+        />
+    <item
+        android:id="@+id/action_listar_disciplinas"
+        android:title="Por disciplinas"
+        android:visible="false"
+        />
+
+</menu>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                style="@style/AppTheme"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="25dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bem_vindo"
+                    android:textColor="@color/white"
+                    android:textSize="40sp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/saudacao"
+                    android:textAlignment="center"
+                    android:textColor="#fff"
+                    android:textSize="15sp" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/button_white_border"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:text="Criar conta"
+                    android:textColor="#fff" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <EditText
+                    android:id="@+id/usuario"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/ic_person_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Seu Login"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorText" />
+
+                <EditText
+                    android:id="@+id/senha"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/ic_lock_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Sua senha"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorText"
+
+                    />
+
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="Salvar minhas credenciais"
+                    android:textColor="#999797"
+                    android:textColorHint="@color/colorText" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/button_color"
+                    android:drawableLeft="@drawable/ic_input_black_24dp"
+                    android:drawablePadding="5dp"
+                    android:foreground="?android:attr/selectableItemBackground"
+                    android:onClick="logar"
+                    android:text="Entrar"
+                    android:textColor="#fff" />
+
+            </LinearLayout>
+        </LinearLayout>
+</LinearLayout>
