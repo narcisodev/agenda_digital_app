@@ -15,6 +15,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.aluno.ListAdapters.ListViewAdapterAtividades;
 import com.example.narcisogomes.myapplication.models.Atividade;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
@@ -27,6 +28,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FragListaTodasAtv extends Fragment{
+
+    ListViewAdapterAtividades listViewAdapterAtividades;
     private ListView listaAtividades;
     private List<Map<String, Object>> atividades;
     private ArrayList<Atividade> atividades_array = new ArrayList<>();
@@ -149,11 +152,14 @@ public class FragListaTodasAtv extends Fragment{
                         atividades_array.add(atividade);
                         atividade = new Atividade();
                     }
+
+                    listViewAdapterAtividades = new ListViewAdapterAtividades(getContext(), atividades_array);
+                    /*
                     String[] de ={"disciplina","data","titulo", "descricao"};
                     int[] para = {R.id.materia, R.id.data_atividade, R.id.titulo_atividade,R.id.descricao_atividade};
                     SimpleAdapter adapter= new SimpleAdapter(getContext(), listarAtividades(), R.layout.aluno_frag_list_atividades_modelo,de,para);
-                    //adapter.setViewBinder(new ListaAtividadesDeAula.AtividadesViewBinder());
-                    listaAtividades.setAdapter(adapter);
+                    //adapter.setViewBinder(new ListaAtividadesDeAula.AtividadesViewBinder());*/
+                    listaAtividades.setAdapter(listViewAdapterAtividades);
 
                 }else{
                     Toast.makeText(getContext(), "Não existem tarefas cadastradas para esta matéria", Toast.LENGTH_LONG);

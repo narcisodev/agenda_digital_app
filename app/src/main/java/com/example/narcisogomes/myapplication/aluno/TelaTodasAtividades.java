@@ -5,6 +5,8 @@ import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -24,6 +26,7 @@ public class TelaTodasAtividades extends AppCompatActivity {
     Atividade a = new Atividade();
     ArrayList<Atividade> lista_atividade = new ArrayList<>();
     Fragment fragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,8 @@ public class TelaTodasAtividades extends AppCompatActivity {
         }else{
             super.onBackPressed();
         }
+
+
 
         return true;
     }
