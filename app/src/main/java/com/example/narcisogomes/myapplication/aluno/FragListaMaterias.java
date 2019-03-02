@@ -60,7 +60,7 @@ public class FragListaMaterias extends Fragment {
                     Values.id_disciplina_lista_materias = (Integer) materia.get("id");
                     //Toast.makeText(getContext(), "Materia: "+ "Nome:" + materia.get("materia")+ " ID: "+ materia.get("id"), Toast.LENGTH_LONG).show();
                     Values_aluno.is_search_disc = true;
-                    startActivity(new Intent(getActivity(), TelaTodasAtividades.class));
+                   // startActivity(new Intent(getActivity(), TelaTodasAtividades.class));
                 }
 
             }

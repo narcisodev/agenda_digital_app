@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".aluno.ListaAitividades" />
         <activity android:name=".aluno.TelaDescAtividade" />
         <activity
             android:name=".professor.TelaProfessor"
@@ -44,7 +43,6 @@
             android:name=".pedagogico.TelaPedagogico"
             android:label="@string/title_activity_tela_pedagogico" />
         <activity android:name=".professor.TelaEditAtividade" />
-        <activity android:name=".aluno.TelaTodasAtividades" />
         <activity android:name=".aluno.ListaTarefas"></activity>
     </application>
 
