@@ -38,31 +38,8 @@ public class ListaTarefas extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Listagem de tarefas");
         listaAtividades = findViewById(R.id.lista_atividades);
-
-
-        /*
-         * Verificação para saber se as tarefas serão pesquisadas pelo id_turma ou pelo id_disciplina
-         * Também verifica se o usuário selecionou o menu de opções da listagem
-         * */
-
-        if(Values_aluno.menu_clicked){
-            Values_aluno.menu_clicked = false;
-            if(Values_aluno.is_search_disc){
-                search_url_service = "acao=3&cause="+Values_aluno.valor_menu_lista_materias+"&id_disciplina="+Values.id_disciplina_lista_materias;
-            }else {
-                search_url_service = "acao=3.1&cause="+Values_aluno.valor_menu_lista_materias + "&id_turma=" + Values_aluno.id_turma;
-            }
-        }else{
-            if(Values_aluno.is_search_disc){
-                search_url_service = "acao=3&cause=after"+"&id_disciplina="+Values.id_disciplina_lista_materias;
-            }else {
-                search_url_service = "acao=3.1&cause=after" + "&id_turma=" + Values_aluno.id_turma;
-            }
-        }
-
+        search_url_service = "acao=3.1&cause=all&id_turma=" + Values_aluno.id_turma;
         new BuscaAtividades().execute();
-
-
     }
 
     @Override
@@ -99,14 +76,14 @@ public class ListaTarefas extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_listar_atuais) {
-            Values_aluno.valor_menu_lista_materias = "after";
-            Values_aluno.menu_clicked = true;
+            search_url_service = "acao=3.1&cause=after&id_turma=" + Values_aluno.id_turma;
+            new BuscaAtividades().execute();
         } else if (id ==R.id.action_listar_anteriores) {
-            Values_aluno.valor_menu_lista_materias = "before";
-            Values_aluno.menu_clicked = true;
+            search_url_service = "acao=3.1&cause=before&id_turma=" + Values_aluno.id_turma;
+            new BuscaAtividades().execute();
         } else if (id == R.id.action_listar_todas) {
-            Values_aluno.valor_menu_lista_materias = "all";
-            Values_aluno.menu_clicked = true;
+            search_url_service = "acao=3.1&cause=all&id_turma=" + Values_aluno.id_turma;
+            new BuscaAtividades().execute();
         }else{
             super.onBackPressed();
         }
@@ -136,7 +113,7 @@ public class ListaTarefas extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             String ab="";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,"acao=3.1&cause=all"+ "&id_turma=" + Values_aluno.id_turma);
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,search_url_service);
             } catch (Exception e) {
                 Toast.makeText(ListaTarefas.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -146,6 +123,7 @@ public class ListaTarefas extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String strings) {
+            atividades_array.clear();
             Atividade atividade = new Atividade();
             String responsebody = strings;
             JSONObject objeto = null;
