@@ -31,7 +31,7 @@ public class ListaAitividades extends AppCompatActivity {
     private List<Map<String, Object>> atividades;
     private ArrayList<Atividade> atividades_array = new ArrayList<>();
     String pesquisa = "acao=3"+"&id_disciplina="+Values.id_disciplina_lista_materias;
-    SearchView searchView  ;
+    SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,13 +55,7 @@ public class ListaAitividades extends AppCompatActivity {
         });
 
         searchView = findViewById(R.id.app_bar_search);
-
-
-
         new BuscaAtividades().execute();
-
-
-
     }
 
     @Override

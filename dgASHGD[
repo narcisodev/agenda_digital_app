@@ -1,0 +1,23 @@
+[33mcommit 42a816ba9f97da6b0cbe228b465e6f44f9f9b12e[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m
+Author: Narciso Almeida <narcisoalmeida25@gmail.com>
+Date:   Fri Mar 1 01:30:28 2019 -0300
+
+    apagar
+
+[33mcommit a0e31007d455d5338126b602df2c7b701e91e93b[m
+Author: Narciso Almeida <narcisoalmeida25@gmail.com>
+Date:   Fri Mar 1 00:59:13 2019 -0300
+
+    Adicionando animação forenground no toque - no xml de lista atividades modelo
+
+[33mcommit 99724e61499487ec6a8623379f3e31ff3d8d2174[m
+Author: Narciso Almeida <narcisoalmeida25@gmail.com>
+Date:   Fri Mar 1 00:54:41 2019 -0300
+
+    Adicionando a Classe ListViewAdapterAtividade e ligando ela ao FragListaTodasAtv para poder usar a busca pela Search View do ActionBar
+
+[33mcommit 87e209cf208abb3c6e54d47b9442c90f3d1f3c39[m
+Author: Narciso Almeida <narcisoalmeida25@gmail.com>
+Date:   Thu Feb 28 01:11:18 2019 -0300
+
+    Commit Inicial

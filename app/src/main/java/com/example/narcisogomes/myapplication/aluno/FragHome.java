@@ -91,7 +91,8 @@ public class FragHome extends Fragment {
             @Override
             public void onClick(View v) {
                 Values_aluno.is_search_disc = false;
-                startActivity(new Intent(getContext(), TelaTodasAtividades.class));
+                startActivity(new Intent(getContext(), ListaTarefas.class));
+                //startActivity(new Intent(getContext(), TelaTodasAtividades.class));
             }
         });
 
