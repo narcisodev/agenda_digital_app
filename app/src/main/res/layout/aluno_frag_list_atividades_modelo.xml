@@ -20,7 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           >
+            android:orientation="horizontal">
+
 
             <TextView
                 android:id="@+id/materia"
@@ -43,6 +44,12 @@
                 android:ellipsize="end"
                 android:text="20/02/2019"
                 android:gravity="end" />
+
+            <TextView
+                android:id="@+id/id_atividade"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
         </LinearLayout>
 
 

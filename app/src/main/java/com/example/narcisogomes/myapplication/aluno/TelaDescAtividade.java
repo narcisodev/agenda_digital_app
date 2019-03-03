@@ -23,20 +23,8 @@ public class TelaDescAtividade extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aluno_activity_tela_desc_atividade);
-
-        if(Values_aluno.is_obj){
-            atv = Values_aluno.atividade_desc;
-            Values_aluno.is_obj= false;
-
-        }else{
-            atv.titulo = (String) Values.atividade_map.get("titulo");
-            atv.descricao = (String) Values.atividade_map.get("descricao");
-            atv.data = (String) Values.atividade_map.get("data");
-            atv.datacriacao= (String) Values.atividade_map.get("datacriacao");
-            atv.data_entrega =  (String) Values.atividade_map.get("data_entrega");
-            atv.pontos = (String) Values.atividade_map.get("pontos");
-            atv.disiciplina = (String) Values.atividade_map.get("disciplina");
-        }
+        
+        atv = Values_aluno.atividade_desc;
 
         titulo_atividade = findViewById(R.id.titulo_atividade);
         descricao_atividade = findViewById(R.id.descricao_atividade);
@@ -55,6 +43,9 @@ public class TelaDescAtividade extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Descrição da Atividade");
+
+
+
     }
 
     @Override

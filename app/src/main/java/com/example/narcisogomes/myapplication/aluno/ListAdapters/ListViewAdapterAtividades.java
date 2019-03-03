@@ -1,12 +1,16 @@
 package com.example.narcisogomes.myapplication.aluno.ListAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.narcisogomes.myapplication.aluno.TelaDescAtividade;
+import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Atividade;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +32,7 @@ public class ListViewAdapterAtividades extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView materia, data_atividade, titulo_atividade, descricao_atividade;
+        TextView materia, data_atividade, titulo_atividade, descricao_atividade, id_atividade;
     }
 
     @Override
@@ -57,6 +61,7 @@ public class ListViewAdapterAtividades extends BaseAdapter {
             holder.data_atividade = convertView.findViewById(R.id.data_atividade);
             holder.titulo_atividade= convertView.findViewById(R.id.titulo_atividade);
             holder.descricao_atividade= convertView.findViewById(R.id.descricao_atividade);
+            holder.id_atividade = convertView.findViewById(R.id.id_atividade);
 
             convertView.setTag(holder);
         }else{
@@ -67,15 +72,23 @@ public class ListViewAdapterAtividades extends BaseAdapter {
         holder.data_atividade.setText(modellist.get(position).data);
         holder.titulo_atividade.setText(modellist.get(position).titulo);
         holder.descricao_atividade.setText(modellist.get(position).descricao);
+        holder.id_atividade.setText(modellist.get(position).id_atividade+"");
 
 
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView a = v.findViewById(R.id.titulo_atividade);
-                String  as = a.getText().toString();
-                Toast.makeText(mContext, "CLICOU: " +as, Toast.LENGTH_SHORT).show();
+
+                int id_atividade;
+                TextView id_atv = v.findViewById(R.id.id_atividade);
+                id_atividade = Integer.parseInt(id_atv.getText().toString());
+                for(Atividade a : arrayList){
+                    if(id_atividade == a.id_atividade){
+                        Values_aluno.atividade_desc = a;
+                        mContext.startActivity(new Intent(mContext, TelaDescAtividade.class));
+                    }
+                }
             }
         });
         return convertView;
