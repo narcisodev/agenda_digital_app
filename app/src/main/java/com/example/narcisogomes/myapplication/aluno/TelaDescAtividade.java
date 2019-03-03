@@ -23,7 +23,7 @@ public class TelaDescAtividade extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aluno_activity_tela_desc_atividade);
-        
+
         atv = Values_aluno.atividade_desc;
 
         titulo_atividade = findViewById(R.id.titulo_atividade);
