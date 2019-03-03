@@ -1,11 +1,13 @@
 package com.example.narcisogomes.myapplication.pedagogico;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +29,7 @@ public class FragTelaInicial extends Fragment {
     TextView nome_ped, email_ped, qtd_alunos_ped, qtd_ocorrencias_ped, qtd_curso_ped, qtd_professores_ped;
    int  qtd_alunos, qtd_curso, qtd_professores;
     int qtd_ocorrencias;
+    CardView a, o , c,p;
 
     @Nullable
     @Override
@@ -37,6 +40,18 @@ public class FragTelaInicial extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        a = view.findViewById(R.id.consultar_alunos);
+        o = view.findViewById(R.id.consultar_ocorrencias);
+        c = view.findViewById(R.id.consultar_cursos);
+        p = view.findViewById(R.id.consultar_professores);
+
+        a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ListaAlunos.class));
+            }
+        });
 
         nome_ped = view.findViewById(R.id.nome_ped);
         email_ped = view.findViewById(R.id.email_ped);

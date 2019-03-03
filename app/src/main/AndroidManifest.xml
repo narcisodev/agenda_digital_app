@@ -44,7 +44,8 @@
             android:name=".pedagogico.TelaPedagogico"
             android:label="@string/title_activity_tela_pedagogico" />
         <activity android:name=".professor.TelaEditAtividade" />
-        <activity android:name=".aluno.ListaTarefas"></activity>
+        <activity android:name=".aluno.ListaTarefas" />
+        <activity android:name=".pedagogico.ListaAlunos"></activity>
     </application>
 
 </manifest>
