@@ -1,19 +1,23 @@
 package com.example.narcisogomes.myapplication.pedagogico;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.aluno.TelaAluno;
 import com.example.narcisogomes.myapplication.professor.FragTarefas;
 
 public class TelaPedagogico extends AppCompatActivity {
 
-
+AlertDialog alerta;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -49,4 +53,63 @@ public class TelaPedagogico extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        alertConfirmaSair();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_pedagogico, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id  = item.getItemId();
+
+
+
+        if (id == R.id.action_search_ped) {
+
+        }
+
+        if(id == R.id.action_refresh_ped){
+
+        }
+
+        if(id == R.id.action_logoff_ped){
+            alertConfirmaSair();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void alertConfirmaSair() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Atenção!");
+        //define a mensagem
+        builder.setMessage("Tem serteza que deseja sair?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                TelaPedagogico.super.onBackPressed();
+
+            }
+        });
+
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 }
