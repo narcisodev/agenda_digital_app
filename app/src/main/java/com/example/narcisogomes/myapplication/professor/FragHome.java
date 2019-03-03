@@ -1,5 +1,6 @@
 package com.example.narcisogomes.myapplication.professor;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Materia;
+import com.example.narcisogomes.myapplication.professor.ListAdapters.ListViewAdapterAtividades;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
 
@@ -26,13 +28,13 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class FragHome extends Fragment {
     TextView nome, email, login, matricula, formacao;
     TextView nome_disciplina_1, turma_disciplina_1, nome_disciplina_2, turma_disciplina_2, nome_disciplina_3, turma_disciplina_3;
     Materia materia = new Materia();
     List<Materia> list_materias = new ArrayList<>();
     LinearLayout ll_sem_disciplina, ll_ver_mais, ll_d1, ll_d2, ll_d3;
-
 
     @Nullable
     @Override
