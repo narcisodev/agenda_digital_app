@@ -15,10 +15,12 @@ import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaAluno;
 import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Aluno;
+import com.example.narcisogomes.myapplication.models.Pedagogico;
 import com.example.narcisogomes.myapplication.models.Professor;
 import com.example.narcisogomes.myapplication.models.Responsavel;
 import com.example.narcisogomes.myapplication.models.Usuario;
 import com.example.narcisogomes.myapplication.pedagogico.TelaPedagogico;
+import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
 import com.example.narcisogomes.myapplication.professor.Values_professor;
 import com.example.narcisogomes.myapplication.professor.TelaProfessor;
 import com.example.narcisogomes.myapplication.responsavel.TelaResp;
@@ -157,6 +159,14 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                     usuario.setLogin(user.getString("login"));
                     usuario.setEmail(user.getString("email"));
                     usuario.setTipoUsuario_id(user.getInt("tipoUsuario_id"));
+
+                    if(usuario.getTipoUsuario_id() ==1){
+                        Pedagogico p = new Pedagogico();
+                        p.setUsuario(usuario);
+                        p.setId_pedagogico(user.getInt("id_pedagogico"));
+                        p.setMatricula(user.getString("matricula"));
+                        Values_pedagogico.ped_logado = p;
+                    }
 
                     if(usuario.getTipoUsuario_id() == 2){
                         Professor prof = new Professor();

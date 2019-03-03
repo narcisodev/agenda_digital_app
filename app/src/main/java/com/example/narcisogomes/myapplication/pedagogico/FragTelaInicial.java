@@ -45,8 +45,8 @@ public class FragTelaInicial extends Fragment {
         qtd_curso_ped = view.findViewById(R.id.qtd_cursos_ped);
         qtd_professores_ped = view.findViewById(R.id.qtd_professores_ped);
 
-        nome_ped.setText(Values.usuario.getNome_usuario());
-        email_ped.setText(Values.usuario.getEmail());
+        nome_ped.setText(Values_pedagogico.ped_logado.getNome_usuario());
+        email_ped.setText(Values_pedagogico.ped_logado.getEmail());
 
         new BuscaDadosInicial().execute();
     }
