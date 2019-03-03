@@ -26,6 +26,7 @@
         <activity
             android:name=".professor.TelaProfessor"
             android:label="@string/title_activity_tela_professor" />
+        <activity android:name=".aluno.ListaTarefasIdDisc" />
         <activity android:name=".professor.TelaCadTarefas" />
         <activity android:name=".professor.ListaMaterias" />
         <activity android:name=".professor.TelaDescAtv" />
