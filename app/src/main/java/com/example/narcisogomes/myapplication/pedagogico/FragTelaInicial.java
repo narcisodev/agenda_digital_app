@@ -53,6 +53,13 @@ public class FragTelaInicial extends Fragment {
             }
         });
 
+        c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ListaCursos.class));
+            }
+        });
+
         nome_ped = view.findViewById(R.id.nome_ped);
         email_ped = view.findViewById(R.id.email_ped);
         qtd_alunos_ped = view.findViewById(R.id.qtd_aluno_ped);
