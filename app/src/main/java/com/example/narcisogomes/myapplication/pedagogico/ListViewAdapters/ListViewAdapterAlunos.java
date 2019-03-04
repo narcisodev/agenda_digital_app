@@ -28,7 +28,7 @@ public class ListViewAdapterAlunos extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView nome, curso, turma, id_aluno;
+        TextView nome, curso, turma, id_aluno, letra_inicial;
     }
 
     @Override
@@ -57,6 +57,7 @@ public class ListViewAdapterAlunos extends BaseAdapter {
             holder.turma = convertView.findViewById(R.id.turma);
             holder.curso = convertView.findViewById(R.id.curso);
             holder.id_aluno = convertView.findViewById(R.id.id_aluno);
+            holder.letra_inicial = convertView.findViewById(R.id.letra_inicial);
 
             convertView.setTag(holder);
         }else{
@@ -67,6 +68,9 @@ public class ListViewAdapterAlunos extends BaseAdapter {
         holder.turma.setText(modellist.get(position).getTurma());
         holder.curso.setText(modellist.get(position).getCurso());
         holder.id_aluno.setText(modellist.get(position).getId_aluno()+"");
+        String nome_l = modellist.get(position).getNome_usuario();
+        char letra_i = nome_l.charAt(0);
+        holder.letra_inicial.setText(letra_i+"");
 
 
 
