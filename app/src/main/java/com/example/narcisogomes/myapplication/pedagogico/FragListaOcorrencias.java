@@ -11,26 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.narcisogomes.myapplication.R;
-import com.example.narcisogomes.myapplication.models.Atividade;
-import com.example.narcisogomes.myapplication.models.Curso;
+import com.example.narcisogomes.myapplication.models.Aluno;
 import com.example.narcisogomes.myapplication.models.Ocorrencia;
-import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterCursos;
 import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterOcorrencias;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class FragListaOcorrencias extends Fragment {
 
@@ -83,12 +74,14 @@ public class FragListaOcorrencias extends Fragment {
         protected void onPostExecute(String strings) {
             al_ocorrencias.clear();
             Ocorrencia ocorrencia = new Ocorrencia();
+            Aluno aluno = new Aluno();
             String responsebody = strings;
             JSONObject objeto = null;
             try {
                 objeto = new JSONObject(responsebody);
                 boolean is = objeto.getBoolean("success");
                 if (is) {
+
                     JSONArray ocorrencias = objeto.getJSONArray("dados");
 
                     for (int i = 0; i < ocorrencias.length(); i++) {
@@ -98,7 +91,15 @@ public class FragListaOcorrencias extends Fragment {
                         ocorrencia.setData(oc_json.getString("data"));
                         ocorrencia.setPedagogico_nome(oc_json.getString("nome"));
 
+                        JSONArray  alunos   = oc_json.getJSONArray("alunos");
 
+                        for(int ia = 0; ia <alunos.length(); ia++){
+                            JSONObject aluno_json = alunos.getJSONObject(ia);
+                            aluno.setNome_usuario(aluno_json.getString("nome"));
+                            aluno.setId_aluno(aluno_json.getInt("id_aluno"));
+                            ocorrencia.getArray_alunos().add(aluno);
+                            aluno = new Aluno();
+                        }
 
                         al_ocorrencias.add(ocorrencia);
                         ocorrencia= new Ocorrencia();
@@ -114,7 +115,9 @@ public class FragListaOcorrencias extends Fragment {
                 }
 
             } catch (JSONException e) {
+                Toast.makeText(getContext(), "erro"+e.getMessage(), Toast.LENGTH_LONG).show();
                 e.printStackTrace();
+
             }
 
             dialog.hide();
