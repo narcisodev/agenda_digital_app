@@ -60,6 +60,13 @@ public class FragTelaInicial extends Fragment {
             }
         });
 
+        p.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ListaProfessores.class));
+            }
+        });
+
         nome_ped = view.findViewById(R.id.nome_ped);
         email_ped = view.findViewById(R.id.email_ped);
         qtd_alunos_ped = view.findViewById(R.id.qtd_aluno_ped);

@@ -43,7 +43,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
         user = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.senha);
         this.alertDialog = criaAviso(""); //cria aviso para uso posterior
-        user.setText("narciso");
+        user.setText("juju");
         pass.setText("123");
     }
 
