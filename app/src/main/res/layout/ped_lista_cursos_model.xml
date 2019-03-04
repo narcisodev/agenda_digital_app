@@ -20,12 +20,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <LinearLayout
                 android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/circlebackaa"
-                android:padding="10dp"
-                app:srcCompat="@drawable/numero1_vector" />
+                android:background="@drawable/circlebackgroundpurple"
+                android:layout_gravity="center">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+
+                    <TextView
+                        android:id="@+id/letra_inicial"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="V"
+                        android:textSize="30dp"
+                        android:textColor="#fff" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
 
 
         </LinearLayout>
