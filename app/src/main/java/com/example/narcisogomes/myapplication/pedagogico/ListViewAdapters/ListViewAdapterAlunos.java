@@ -110,8 +110,6 @@ public class ListViewAdapterAlunos extends BaseAdapter {
                             }
                         }
                     }
-                }else{
-                    Toast.makeText(mContext, "NÃO ESTÁ ATIVO O IS_TELA_OC", Toast.LENGTH_SHORT).show();
                 }
             }
         });

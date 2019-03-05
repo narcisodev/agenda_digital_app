@@ -6,10 +6,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
+import com.example.narcisogomes.myapplication.pedagogico.CadastroOcorrencia;
 import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +25,7 @@ public class ListViewAdapterAlunosOcorrencia extends BaseAdapter {
     LayoutInflater inflater;
     List<Aluno> modellist;
     ArrayList<Aluno> arrayList;
+    CadastroOcorrencia ca;
 
     public ListViewAdapterAlunosOcorrencia(Context mContext, List<Aluno> modellist) {
         this.mContext = mContext;
@@ -28,6 +33,7 @@ public class ListViewAdapterAlunosOcorrencia extends BaseAdapter {
         inflater = LayoutInflater.from(mContext);
         this.arrayList = new ArrayList<Aluno>();
         this.arrayList.addAll(modellist);
+        this.ca = (CadastroOcorrencia) mContext;
     }
 
     public class ViewHolder{
@@ -85,6 +91,19 @@ public class ListViewAdapterAlunosOcorrencia extends BaseAdapter {
 
             }
         });
+
+        convertView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                TextView a = v.findViewById(R.id.id_aluno);
+                int id = Integer.parseInt(a.getText().toString());
+                ca.alertConfirmaRemoveAluno(id);
+                return true;
+            }
+        });
+
+
+
         return convertView;
     }
 
