@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     android:background="@color/grayligth"
     tools:context=".pedagogico.CadastroOcorrencia"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:padding="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -58,15 +59,24 @@
             android:layout_marginRight="8dp"
             android:text="ALUNOS"/>
 
-        <ListView
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:background="#fff"
-            android:id="@+id/lista_alunos_oc"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        </ListView>
+            <com.example.narcisogomes.myapplication.util.ListViewPersoN
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#fff"
+                android:id="@+id/lista_alunos_oc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+            </com.example.narcisogomes.myapplication.util.ListViewPersoN>
+
+
+        </RelativeLayout>
+
 
 
         <Button
