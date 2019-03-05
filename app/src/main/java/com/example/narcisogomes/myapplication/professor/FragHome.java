@@ -36,6 +36,8 @@ public class FragHome extends Fragment {
     List<Materia> list_materias = new ArrayList<>();
     LinearLayout ll_sem_disciplina, ll_ver_mais, ll_d1, ll_d2, ll_d3;
 
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

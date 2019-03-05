@@ -1,10 +1,12 @@
 package com.example.narcisogomes.myapplication.pedagogico;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -28,6 +30,7 @@ public class FragListaOcorrencias extends Fragment {
     private ListView lv_ocorrencias;
     private ArrayList<Ocorrencia> al_ocorrencias = new ArrayList<>();
     private ListViewAdapterOcorrencias lavo;
+    FloatingActionButton fab;
 
     @Nullable
     @Override
@@ -39,6 +42,14 @@ public class FragListaOcorrencias extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         lv_ocorrencias = view.findViewById(R.id.lista_ocorrencias);
+        fab = view.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), CadastroOcorrencia.class));
+            }
+        });
         new BuscaOcorrencias().execute();
     }
 

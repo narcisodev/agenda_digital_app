@@ -47,7 +47,8 @@
         <activity android:name=".aluno.ListaTarefas" />
         <activity android:name=".pedagogico.ListaAlunos" />
         <activity android:name=".pedagogico.ListaCursos" />
-        <activity android:name=".pedagogico.ListaProfessores"></activity>
+        <activity android:name=".pedagogico.ListaProfessores" />
+        <activity android:name=".pedagogico.CadastroOcorrencia"></activity>
     </application>
 
 </manifest>
