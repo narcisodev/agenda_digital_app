@@ -16,11 +16,14 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterAlunos;
+import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterAlunosOcorrencia;
 import com.example.narcisogomes.myapplication.util.Util;
 
 import java.util.Calendar;
 
 public class CadastroOcorrencia extends AppCompatActivity {
+    ListViewAdapterAlunosOcorrencia lvaa;
 
     ListView lv_alunos_oc;
     int mes, ano, dia, hora, minuto, segundo, horat, minutot;
@@ -56,9 +59,19 @@ public class CadastroOcorrencia extends AppCompatActivity {
 
         data_oc.setText(Util.formataHora(dia) + "/" + Util.transformaMes(mes) + "/" + ano + "-" + Util.formataHora(hora) + ":" + Util.formataHora(minuto));
 
+        /*
         String[] city_names = {"Óbidos", "Santarém", "Manaus", "Mondongo", "Santos", "Rio de Janeiro", "Fumaça", "Loucuara", "Belterra", "Peixe Boi", "Santa Helema", "Mario Santos", "Junior Gustavo"};
         ArrayAdapter a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, city_names);
         lv_alunos_oc.setAdapter(a);
+        */
+    }
+
+
+    @Override
+    protected void onResume() {
+        lvaa = new ListViewAdapterAlunosOcorrencia(CadastroOcorrencia.this, Values_pedagogico.lista_alunos);
+        lv_alunos_oc.setAdapter(lvaa);
+        super.onResume();
     }
 
     @Override
@@ -72,6 +85,7 @@ public class CadastroOcorrencia extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.add_alunos){
+            Values_pedagogico.is_tela_oc = true;
             startActivity(new Intent(CadastroOcorrencia.this, ListaAlunos.class));
         }else{
             onBackPressed();

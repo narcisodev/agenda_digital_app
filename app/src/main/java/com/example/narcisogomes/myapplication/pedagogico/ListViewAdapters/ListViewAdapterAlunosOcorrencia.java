@@ -1,32 +1,28 @@
 package com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
 import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ListViewAdapterAlunos extends BaseAdapter {
+public class ListViewAdapterAlunosOcorrencia extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
     List<Aluno> modellist;
     ArrayList<Aluno> arrayList;
 
-    public ListViewAdapterAlunos(Context mContext, List<Aluno> modellist) {
+    public ListViewAdapterAlunosOcorrencia(Context mContext, List<Aluno> modellist) {
         this.mContext = mContext;
         this.modellist = modellist;
         inflater = LayoutInflater.from(mContext);
@@ -58,7 +54,7 @@ public class ListViewAdapterAlunos extends BaseAdapter {
         ViewHolder holder;
 
         if(convertView == null){
-            holder = new ListViewAdapterAlunos.ViewHolder();
+            holder = new ListViewAdapterAlunosOcorrencia.ViewHolder();
             convertView = inflater.inflate(R.layout.ped_lista_alunos_model, null);
             holder.nome = convertView.findViewById(R.id.nome);
             holder.turma = convertView.findViewById(R.id.turma);
@@ -86,33 +82,7 @@ public class ListViewAdapterAlunos extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(Values_pedagogico.is_tela_oc){
-                    int id_aluno;
-                    TextView a = v.findViewById(R.id.id_aluno);
-                    String aa = a.getText().toString();
-                    id_aluno = Integer.parseInt(aa);
-                    Log.e("TAGTESTE", "ID ALUNO: "+ id_aluno);
-                    boolean pesquisar = true;
 
-                    for(Aluno al : Values_pedagogico.lista_alunos){
-                        if(al.getId_aluno() == id_aluno){
-                            pesquisar = false;
-                            Toast.makeText(mContext, "Aluno: "+ al.getNome_usuario()+ " já está adicionado nesta ocorrência!", Toast.LENGTH_SHORT).show();
-                            break;
-                        }
-                    }
-
-                    if(pesquisar){
-                        for(Aluno aluno_l : arrayList){
-                            if(aluno_l.getId_aluno() == id_aluno){
-                                Values_pedagogico.lista_alunos.add(aluno_l);
-                                Toast.makeText(mContext, "Aluno: "+ aluno_l.getNome_usuario()+ " adicionado com sucesso!", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-                }else{
-                    Toast.makeText(mContext, "NÃO ESTÁ ATIVO O IS_TELA_OC", Toast.LENGTH_SHORT).show();
-                }
             }
         });
         return convertView;

@@ -8,6 +8,8 @@ import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -28,16 +30,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaAlunos extends AppCompatActivity {
- ArrayList<Aluno> lista_alunos = new ArrayList<>();
- ListViewAdapterAlunos laa;
- ListView lv_alunos;
+    ArrayList<Aluno> lista_alunos = new ArrayList<>();
+    ListViewAdapterAlunos laa;
+    ListView lv_alunos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ped_activity_lista_alunos);
         lv_alunos = findViewById(R.id.lista_alunos);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Listagem de alunos");
@@ -49,7 +50,7 @@ public class ListaAlunos extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pedagogico_lista_alunos, menu);
-        MenuItem myActionMenuItem= menu.findItem(R.id.action_search_ped);
+        MenuItem myActionMenuItem = menu.findItem(R.id.action_search_ped);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -59,10 +60,10 @@ public class ListaAlunos extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
+                if (TextUtils.isEmpty(newText)) {
                     laa.filter("");
                     lv_alunos.clearTextFilter();
-                }else{
+                } else {
                     laa.filter(newText);
                 }
                 return true;
@@ -95,9 +96,9 @@ public class ListaAlunos extends AppCompatActivity {
          * */
         @Override
         protected String doInBackground(Void... voids) {
-            String ab="";
+            String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,"acao=11");
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=11");
             } catch (Exception e) {
                 Toast.makeText(ListaAlunos.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -114,10 +115,10 @@ public class ListaAlunos extends AppCompatActivity {
             try {
                 objeto = new JSONObject(responsebody);
                 boolean is = objeto.getBoolean("success");
-                if(is){
+                if (is) {
                     JSONArray alunos = objeto.getJSONArray("dados");
 
-                    for(int i = 0; i< alunos.length(); i++){
+                    for (int i = 0; i < alunos.length(); i++) {
                         JSONObject aluno_json = alunos.getJSONObject(i);
                         aluno.setId_aluno(aluno_json.getInt("id_aluno"));
                         aluno.setCurso(aluno_json.getString("curso"));
@@ -128,11 +129,9 @@ public class ListaAlunos extends AppCompatActivity {
                     }
 
                     laa = new ListViewAdapterAlunos(ListaAlunos.this, lista_alunos);
+                    lv_alunos.setAdapter(laa);
 
-
-                   lv_alunos.setAdapter(laa);
-
-                }else{
+                } else {
                     Toast.makeText(ListaAlunos.this, "Não existem tarefas cadastradas para esta matéria", Toast.LENGTH_LONG).show();
                 }
 
