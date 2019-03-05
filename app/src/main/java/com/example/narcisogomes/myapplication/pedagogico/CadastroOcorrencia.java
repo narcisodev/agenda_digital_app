@@ -3,8 +3,11 @@ package com.example.narcisogomes.myapplication.pedagogico;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,6 +39,10 @@ public class CadastroOcorrencia extends AppCompatActivity {
             }
         });
 
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
+        getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
+        getSupportActionBar().setTitle("Cadastro de Ocorrência");
+
         //CONFIG DATA ENTREGA
         Calendar calendar = Calendar.getInstance();
         ano = calendar.get(Calendar.YEAR);
@@ -52,6 +59,24 @@ public class CadastroOcorrencia extends AppCompatActivity {
         String[] city_names = {"Óbidos", "Santarém", "Manaus", "Mondongo", "Santos", "Rio de Janeiro", "Fumaça", "Loucuara", "Belterra", "Peixe Boi", "Santa Helema", "Mario Santos", "Junior Gustavo"};
         ArrayAdapter a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, city_names);
         lv_alunos_oc.setAdapter(a);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_cad_ocorrencia, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if(id == R.id.add_alunos){
+            startActivity(new Intent(CadastroOcorrencia.this, ListaAlunos.class));
+        }else{
+            onBackPressed();
+        }
+        return true;
     }
 
     public void selecionarData(View view) {
