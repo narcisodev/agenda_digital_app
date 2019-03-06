@@ -1,6 +1,7 @@
 package com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,11 @@ import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
 import com.example.narcisogomes.myapplication.models.Ocorrencia;
 import com.example.narcisogomes.myapplication.models.Professor;
+import com.example.narcisogomes.myapplication.pedagogico.CadastroOcorrencia;
+import com.example.narcisogomes.myapplication.pedagogico.DescOcorrencia;
+import com.example.narcisogomes.myapplication.pedagogico.ListaAlunos;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -85,7 +91,13 @@ public class ListViewAdapterOcorrencias extends BaseAdapter {
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                int id_ocorrencia;
+                TextView t = v.findViewById(R.id.id_ocorrencia);
+                String id_s = t.getText().toString();
+                id_ocorrencia = Integer.parseInt(id_s);
+                Intent i = new Intent(mContext, DescOcorrencia.class);
+                i.putExtra("id_oc", id_ocorrencia+"");
+                mContext.startActivity(i);
             }
         });
         return convertView;
