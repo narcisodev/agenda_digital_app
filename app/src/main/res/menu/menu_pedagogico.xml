@@ -9,11 +9,14 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always" />
 
+
     <item
         android:id="@+id/action_refresh_ped"
         android:icon="@drawable/ic_autorenew_white_24dp"
         android:title="@string/sair"
-        app:showAsAction="always"/>
+        app:showAsAction="always"
+        android:visible="false"/>
+
 
     <item
         android:id="@+id/action_logoff_ped"
