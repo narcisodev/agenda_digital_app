@@ -63,19 +63,21 @@
 
                                 <TextView
                                     android:id="@+id/nome_ped"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:text="Juliana Bentes de Souza"
-                                    android:textStyle="bold" />
+                                    android:textAlignment="textStart"
+                                    android:text=""
+                                    android:textStyle="bold"
+                                    android:gravity="start" />
 
                                 <TextView
+                                    android:textAlignment="textStart"
                                     android:id="@+id/email_ped"
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
-                                    android:text="julianabentes@gmail.com"
-                                     />
+                                    android:text=""
+                                    tools:ignore="RtlCompat" />
 
                             </LinearLayout>
 
@@ -132,7 +134,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="332 Alunos"
+                            android:text=""
                             android:textStyle="bold" />
 
                         <View
@@ -146,7 +148,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:padding="5dp"
-                            android:text="Calculo do Quantitativo de Alunos Matriculados"
+                            android:text="Cálculo do quantitativo de alunos matriculados"
                             android:textColor="@color/darkergray" />
 
                     </LinearLayout>
@@ -181,7 +183,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="220 ocorrencias"
+                            android:text=""
                             android:textStyle="bold" />
 
                         <View
@@ -237,7 +239,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="4 cursos"
+                            android:text=""
                             android:textStyle="bold" />
 
                         <View
@@ -286,7 +288,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:text="40 professores"
+                            android:text=""
                             android:textStyle="bold" />
 
                         <View
