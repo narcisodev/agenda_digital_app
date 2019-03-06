@@ -38,7 +38,7 @@ public class TelaDescAtv extends AppCompatActivity {
         txt_pontos = findViewById(R.id.pontos);
         txt_data_criacao = findViewById(R.id.data_criacao);
         txt_data_entrega = findViewById(R.id.data_entrega);
-        a = Values.atividade_obj;
+        a = Values_professor.atividade_obj;
         txt_titulo.setText(a.titulo);
         txt_descricao.setText(a.descricao);
         txt_pontos.setText(a.pontos);
@@ -65,7 +65,6 @@ public class TelaDescAtv extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Values_professor.atividade_obj = Values.atividade_obj;
         if (id == R.id.prof_menu_action_edit_tarefa) {
             startActivity(new Intent(getApplicationContext(), TelaEditAtividade.class));
         }

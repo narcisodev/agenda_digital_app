@@ -13,6 +13,8 @@ import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaDescAtividade;
 import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Atividade;
+import com.example.narcisogomes.myapplication.professor.TelaDescAtv;
+import com.example.narcisogomes.myapplication.professor.Values_professor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,7 +36,7 @@ public class ListViewAdapterAtividades extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView data_entrega, titulo_atividade, disciplina_atividade;
+        TextView data_entrega, titulo_atividade, disciplina_atividade, id_atividade;
     }
 
     @Override
@@ -64,6 +66,7 @@ public class ListViewAdapterAtividades extends BaseAdapter {
             holder.data_entrega = convertView.findViewById(R.id.data_entrega);
             holder.titulo_atividade = convertView.findViewById(R.id.titulo_atividade);
             holder.disciplina_atividade= convertView.findViewById(R.id.disciplina_atividade);
+            holder.id_atividade = convertView.findViewById(R.id.id_atividade);
             convertView.setTag(holder);
 
 
@@ -75,13 +78,23 @@ public class ListViewAdapterAtividades extends BaseAdapter {
         holder.data_entrega.setText(modellist.get(position).data);
         holder.titulo_atividade.setText(modellist.get(position).titulo);
         holder.disciplina_atividade.setText(modellist.get(position).disiciplina);
+        holder.id_atividade.setText(modellist.get(position).id_atividade+"");
 
 
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "IIIIIIIIIIIIII", Toast.LENGTH_LONG);
+                TextView t = v.findViewById(R.id.id_atividade);
+                String id_s = t.getText().toString();
+                int id = Integer.parseInt(id_s);
+                for(Atividade a: modellist){
+                    if(a.id_atividade == id){
+                        Values_professor.atividade_obj = a;
+                        mContext.startActivity(new Intent(mContext, TelaDescAtv.class));
+                        break;
+                    }
+                }
             }
         });
         return convertView;

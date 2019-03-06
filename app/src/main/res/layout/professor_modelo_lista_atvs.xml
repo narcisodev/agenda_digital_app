@@ -17,7 +17,17 @@
         android:layout_marginRight="10dp"
         android:orientation="vertical">
 
+
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/id_atividade">
+
+        </TextView>
+
+        <TextView
+            android:singleLine="true"
             android:id="@+id/data_entrega"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
@@ -29,7 +39,8 @@
 
         <TextView
             android:id="@+id/titulo_atividade"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:singleLine="true"
             android:layout_height="wrap_content"
             android:text="Exercício Avaliativo"
             android:textColor="@color/colorText"
@@ -37,9 +48,11 @@
             android:textSize="20dp"/>
 
         <TextView
+
             android:layout_marginTop="1dp"
             android:id="@+id/disciplina_atividade"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:singleLine="true"
             android:layout_height="wrap_content"
             android:text="Banco de Dados e Susas Tecnologias"/>
 
