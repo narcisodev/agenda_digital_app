@@ -17,13 +17,4 @@ public class Values_pedagogico {
     public static boolean is_tela_oc = false;
 
 
-    /**
-     * guarda qual o fragmento atual está em execução no frame principal
-     * DASH - Página inicial
-     * OCR  - Fragmento de Lista de Ocorrências
-     */
-    public static String n_frag = "DASH";
-
-
-
 }
