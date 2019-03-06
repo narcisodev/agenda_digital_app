@@ -102,12 +102,15 @@ public class CadastroOcorrencia extends AppCompatActivity {
 
         if(descricao.length() == 0){
             Toast.makeText(CadastroOcorrencia.this, "Por favor informe a descrição da ocorrencia",Toast.LENGTH_SHORT).show();
+        }else if(Values_pedagogico.lista_alunos.size()==0){
+            Toast.makeText(CadastroOcorrencia.this, "Você precisa adicionar ao menos um aluno para poder cadastrar a ocorrência.",Toast.LENGTH_LONG).show();
         }else{
             ocorrencia_c = new Ocorrencia();
             ocorrencia_c.setDescricao(txt_descrica.getText().toString());
             ocorrencia_c.setData(ano+"-"+Util.transformaMes(mes+1)+"-"+Util.formataHora(dia)+" "+Util.formataHora(horat)+":"+Util.formataHora(minutot)+":00");
             new CadastrarOcorrencia().execute();
         }
+
     }
 
 
