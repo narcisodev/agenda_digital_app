@@ -21,6 +21,7 @@ import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Aluno;
 import com.example.narcisogomes.myapplication.models.Ocorrencia;
 import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterAlunosOcorrencia;
@@ -35,6 +36,8 @@ import org.json.JSONObject;
 import java.util.Calendar;
 
 public class CadastroOcorrencia extends AppCompatActivity {
+    int id_aluno_oc;
+    int id_oc;
     AlertDialog alerta;
     ListViewAdapterAlunosOcorrencia lvaa;
     EditText txt_descrica;
@@ -108,9 +111,14 @@ public class CadastroOcorrencia extends AppCompatActivity {
     }
 
 
-    private void cadastrarAlunosOcorrencia(){
-
+    private void limpaForm(){
+        txt_descrica.setText("");
+        Values_pedagogico.lista_alunos.clear();
+        lvaa = new ListViewAdapterAlunosOcorrencia(CadastroOcorrencia.this, Values_pedagogico.lista_alunos);
+        lv_alunos_oc.setAdapter(lvaa);
     }
+
+
 
 
     @Override
@@ -244,12 +252,26 @@ public class CadastroOcorrencia extends AppCompatActivity {
         @Override
         protected String doInBackground(Void... voids) {
             String ab = "";
+
+            String id_alunos="";
+            int tamanho_lista = Values_pedagogico.lista_alunos.size() - 1;
+            for (int i = 0; i< Values_pedagogico.lista_alunos.size(); i++){
+                if(i == tamanho_lista){
+                    Aluno a = Values_pedagogico.lista_alunos.get(i);
+                    id_alunos+=a.getId_aluno();
+                }else{
+                    Aluno a = Values_pedagogico.lista_alunos.get(i);
+                    id_alunos+=a.getId_aluno()+",";
+                }
+
+            }
+
             try {
                 ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=15" +
-                        "&t_cad=cad_o"+
                         "&descricao=" + ocorrencia_c.getDescricao() +
                         "&datacriacao=" + ocorrencia_c.getData() +
-                        "&id_ped=" + Values_pedagogico.ped_logado.getId_pedagogico());
+                        "&id_ped=" + Values_pedagogico.ped_logado.getId_pedagogico()+
+                        "&alunos_oc="+id_alunos);
 
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -266,11 +288,8 @@ public class CadastroOcorrencia extends AppCompatActivity {
                 boolean is = objeto.getBoolean("success");
                 String mensagem = objeto.getString("message");
                 if (is) {
-                    JSONObject dados = objeto.getJSONObject("dados");
-
-                    int id = dados.getInt("id_tarefa");
-
-                    Toast.makeText(getApplicationContext(), mensagem + " ID TAREFA: "+ id, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_LONG).show();
+                    limpaForm();
                 } else {
                     Toast.makeText(getApplicationContext(), "Erro ao salvar a tarefa: " + mensagem, Toast.LENGTH_LONG).show();
                 }
@@ -282,6 +301,6 @@ public class CadastroOcorrencia extends AppCompatActivity {
 
 
     }
-
-
 }
+
+
