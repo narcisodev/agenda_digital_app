@@ -41,7 +41,7 @@ public class FragListaOcorrencias extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        lv_ocorrencias = view.findViewById(R.id.lista_ocorrencias);
+        Values_pedagogico.lv_ocorrencias = view.findViewById(R.id.lista_ocorrencias);
         fab = view.findViewById(R.id.fab);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -104,22 +104,29 @@ public class FragListaOcorrencias extends Fragment {
 
                         JSONArray  alunos   = oc_json.getJSONArray("alunos");
 
+                        String nome_alunos="";
+                        int tamanho_array = alunos.length()-1;
                         for(int ia = 0; ia <alunos.length(); ia++){
                             JSONObject aluno_json = alunos.getJSONObject(ia);
+                            if(ia == tamanho_array){
+                                nome_alunos+= aluno_json.getString("nome")+".";
+                            }else{
+                                nome_alunos+= aluno_json.getString("nome")+", ";
+                            }
                             aluno.setNome_usuario(aluno_json.getString("nome"));
                             aluno.setId_aluno(aluno_json.getInt("id_aluno"));
                             ocorrencia.getArray_alunos().add(aluno);
                             aluno = new Aluno();
                         }
 
+                        ocorrencia.setNome_al(nome_alunos);
+
                         al_ocorrencias.add(ocorrencia);
                         ocorrencia= new Ocorrencia();
                     }
 
-                    lavo = new ListViewAdapterOcorrencias(getContext(), al_ocorrencias);
-
-
-                    lv_ocorrencias.setAdapter(lavo);
+                   Values_pedagogico.listViewAdapterOcorrencias = new ListViewAdapterOcorrencias(getContext(), al_ocorrencias);
+                    Values_pedagogico.lv_ocorrencias.setAdapter(Values_pedagogico.listViewAdapterOcorrencias);
 
                 } else {
                     Toast.makeText(getContext(), "Não existem tarefas cadastradas para esta matéria", Toast.LENGTH_LONG).show();

@@ -75,18 +75,7 @@ public class ListViewAdapterOcorrencias extends BaseAdapter {
         holder.id_ocorrencia.setText(modellist.get(position).getId()+"");
         holder.data_ocorrencia.setText(modellist.get(position).getData());
         holder.descrica_ocorrencia.setText(modellist.get(position).getDescricao());
-        String nomes_alunos= "";
-        int tamanho_array = modellist.get(position).getArray_alunos().size();
-        ArrayList<Aluno> al_a = modellist.get(position).getArray_alunos();
-        for(int i = 0; i< al_a.size(); i++){
-            Aluno a  = al_a.get(i);
-            if(i == tamanho_array-1){
-                nomes_alunos += a.getNome_usuario()+".";
-            }else{
-                nomes_alunos += a.getNome_usuario()+", ";
-            }
-        }
-        holder.alunos_ocorrencia.setText(nomes_alunos);
+        holder.alunos_ocorrencia.setText(modellist.get(position).getNome_al());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +102,21 @@ public class ListViewAdapterOcorrencias extends BaseAdapter {
                 if(ocorrencia.getDescricao().toLowerCase(Locale.getDefault()).contains(charText)){
                     modellist.add(ocorrencia);
                 }
+
+                if(ocorrencia.getData().toLowerCase(Locale.getDefault()).contains(charText)){
+                    modellist.add(ocorrencia);
+                }
+
+                if(ocorrencia.getNome_al().toLowerCase(Locale.getDefault()).contains(charText)){
+                    modellist.add(ocorrencia);
+                }
+
+                if((ocorrencia.getId()+"").toLowerCase(Locale.getDefault()).contains(charText)){
+                    modellist.add(ocorrencia);
+                }
+
+
+
             }
         }
 

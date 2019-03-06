@@ -9,6 +9,7 @@ public class Ocorrencia {
     private String data;
     private String descricao;
     private String pedagogico_nome;
+    private String nome_al;
     private ArrayList<Aluno> array_alunos = new ArrayList<>();
 
     public String getPedagogico_nome() {
@@ -50,5 +51,13 @@ public class Ocorrencia {
 
     public void setArray_alunos(ArrayList<Aluno> array_alunos) {
         this.array_alunos = array_alunos;
+    }
+
+    public String getNome_al() {
+        return nome_al;
+    }
+
+    public void setNome_al(String nome_al) {
+        this.nome_al = nome_al;
     }
 }

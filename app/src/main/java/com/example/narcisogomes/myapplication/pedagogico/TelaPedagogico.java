@@ -7,6 +7,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaAluno;
 import com.example.narcisogomes.myapplication.professor.FragTarefas;
+import com.example.narcisogomes.myapplication.professor.Values_professor;
 
 public class TelaPedagogico extends AppCompatActivity {
 
@@ -62,6 +65,26 @@ AlertDialog alerta;
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pedagogico, menu);
+
+        MenuItem myActionMenuItem= menu.findItem(R.id.action_search_ped);
+        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(TextUtils.isEmpty(newText)){
+                   Values_pedagogico.listViewAdapterOcorrencias.filter("");
+                    Values_pedagogico.lv_ocorrencias.clearTextFilter();
+                }else{
+                    Values_pedagogico.listViewAdapterOcorrencias.filter(newText);
+                }
+                return true;
+            }
+        });
         return true;
     }
 
