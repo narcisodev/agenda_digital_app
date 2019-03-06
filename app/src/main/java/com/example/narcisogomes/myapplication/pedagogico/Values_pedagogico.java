@@ -11,12 +11,19 @@ import java.util.ArrayList;
 public class Values_pedagogico {
     public static ListViewAdapterOcorrencias listViewAdapterOcorrencias;
     public static ListView lv_ocorrencias;
-
-
     public static Pedagogico ped_logado = new Pedagogico();
-
     //VARIAVEL PARA COMUNICAR A TROCA DE DADOS ENTRE O CADASTRO DE OCORRENCIAS E A LISTAGEM DE ALUNOS
     public static ArrayList<Aluno> lista_alunos = new ArrayList<>();
     public static boolean is_tela_oc = false;
+
+
+    /**
+     * guarda qual o fragmento atual está em execução no frame principal
+     * DASH - Página inicial
+     * OCR  - Fragmento de Lista de Ocorrências
+     */
+    public static String n_frag = "DASH";
+
+
 
 }

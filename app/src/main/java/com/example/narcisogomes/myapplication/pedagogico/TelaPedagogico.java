@@ -20,7 +20,8 @@ import com.example.narcisogomes.myapplication.professor.Values_professor;
 
 public class TelaPedagogico extends AppCompatActivity {
 
-AlertDialog alerta;
+    AlertDialog alerta;
+    int count_menu = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -31,13 +32,14 @@ AlertDialog alerta;
 
             switch (item.getItemId()) {
                 case R.id.navigation_inicio:
+
                     fragment = new FragTelaInicial();
                     break;
                 case R.id.navigation_ocorrencias:
                     fragment = new FragListaOcorrencias();
                     break;
             }
-            if(fragment !=null){
+            if (fragment != null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, fragment).commit();
             }
             return true;
@@ -48,6 +50,7 @@ AlertDialog alerta;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pedagogico_act_tela_princ);
+
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         getSupportActionBar().setTitle("Área do Pedagogo");
@@ -63,10 +66,11 @@ AlertDialog alerta;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        count_menu++;
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pedagogico, menu);
 
-        MenuItem myActionMenuItem= menu.findItem(R.id.action_search_ped);
+        MenuItem myActionMenuItem = menu.findItem(R.id.action_search_ped);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -76,33 +80,34 @@ AlertDialog alerta;
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
-                   Values_pedagogico.listViewAdapterOcorrencias.filter("");
+                if (TextUtils.isEmpty(newText)) {
+                    Values_pedagogico.listViewAdapterOcorrencias.filter("");
                     Values_pedagogico.lv_ocorrencias.clearTextFilter();
-                }else{
+                } else {
                     Values_pedagogico.listViewAdapterOcorrencias.filter(newText);
                 }
                 return true;
             }
         });
+
+
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id  = item.getItemId();
-
+        int id = item.getItemId();
 
 
         if (id == R.id.action_search_ped) {
 
         }
 
-        if(id == R.id.action_refresh_ped){
+        if (id == R.id.action_refresh_ped) {
 
         }
 
-        if(id == R.id.action_logoff_ped){
+        if (id == R.id.action_logoff_ped) {
             alertConfirmaSair();
         }
         return super.onOptionsItemSelected(item);
