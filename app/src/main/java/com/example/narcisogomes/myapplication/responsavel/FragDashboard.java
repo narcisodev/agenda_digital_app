@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
+import com.example.narcisogomes.myapplication.models.Responsavel;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
 import org.json.JSONArray;
@@ -51,11 +52,12 @@ public class FragDashboard extends Fragment {
         txt_rua = view.findViewById(R.id.rua_resp);
         txt_bairro = view.findViewById(R.id.bairro_resp);
         txt_numero = view.findViewById(R.id.numero_resp);
-        txt_nome.setText("Nome: "+Values.responsavel.getNome_usuario());
-        txt_email.setText("Email: "+ Values.responsavel.getEmail());
-        txt_rua.setText("Rua: "+ Values.responsavel.getRua());
-        txt_bairro.setText("Bairro: "+Values.responsavel.getBairro());
-        txt_numero.setText("Número: "+Values.responsavel.getNumero());
+        Responsavel r = Values_resp.resp_logado;
+        txt_nome.setText("Nome: "+r.getNome_usuario());
+        txt_email.setText("Email: "+ r.getEmail());
+        txt_rua.setText("Rua: "+ r.getRua());
+        txt_bairro.setText("Bairro: "+r.getBairro());
+        txt_numero.setText("Número: "+r.getNumero());
 
 
         lista_alunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -111,7 +113,7 @@ public class FragDashboard extends Fragment {
             String ab = "";
             try {
                 ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=7" +
-                        "&id_resp=" + Values.usuario.getId_ususario_t());
+                        "&id_resp=" + Values_resp.resp_logado.getId_reponsavel());
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }

@@ -24,6 +24,7 @@ import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
 import com.example.narcisogomes.myapplication.professor.Values_professor;
 import com.example.narcisogomes.myapplication.professor.TelaProfessor;
 import com.example.narcisogomes.myapplication.responsavel.TelaResp;
+import com.example.narcisogomes.myapplication.responsavel.Values_resp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -166,7 +167,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                         p.setId_pedagogico(user.getInt("id_pedagogico"));
                         p.setMatricula(user.getString("matricula"));
                         Values_pedagogico.ped_logado = p;
-                    }
+                    }else
 
                     if(usuario.getTipoUsuario_id() == 2){
                         Professor prof = new Professor();
@@ -186,8 +187,9 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                         responsavel.setBairro(user.getString("bairro"));
                         responsavel.setNumero(user.getString("numero"));
                         responsavel.setCidade(user.getString("cidade"));
-                        responsavel.setId_reponsavel(user.getInt("id_usuario_t"));
-                        Values.responsavel = responsavel;
+                        responsavel.setId_reponsavel(user.getInt("id_responsavel"));
+                        Values_resp.resp_logado = responsavel;
+
                     }else
                         if(usuario.getTipoUsuario_id()==4){
                         Aluno aluno = new Aluno();
