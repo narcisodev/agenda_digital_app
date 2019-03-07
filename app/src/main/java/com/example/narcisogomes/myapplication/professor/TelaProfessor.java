@@ -1,8 +1,10 @@
 package com.example.narcisogomes.myapplication.professor;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -13,10 +15,12 @@ import android.widget.TextView;
 import android.support.v4.app.Fragment;
 
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.pedagogico.TelaPedagogico;
 import com.example.narcisogomes.myapplication.professor.ListAdapters.ListViewAdapterAtividades;
 import com.example.narcisogomes.myapplication.util.Mensagens;
 
 public class TelaProfessor extends AppCompatActivity {
+    AlertDialog alerta;
     private TextView mTextMessage;
     private String frag_ativo = "frag_home";
     ListViewAdapterAtividades listViewAdapterAtividades;
@@ -116,7 +120,7 @@ public class TelaProfessor extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.navigation_logoff_prof) {
-            super.onBackPressed();
+            alertConfirmaSair();
         }
 
         if (id == R.id.navigation_refresh_prof) {
@@ -135,5 +139,34 @@ public class TelaProfessor extends AppCompatActivity {
             }
         }
         return super.onOptionsItemSelected(item);
+    }
+
+
+    private void alertConfirmaSair() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Atenção!");
+        //define a mensagem
+        builder.setMessage("Tem serteza que deseja sair?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                onBackPressed();
+
+            }
+        });
+
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
     }
 }

@@ -63,6 +63,7 @@ public class FragListaOcorrencias extends Fragment {
             dialog = new ProgressDialog(getContext());
             dialog.setTitle(R.string.carregando);
             dialog.setMessage("Estamos carregando a sua requisição...");
+            dialog.setCancelable(false);
             dialog.show();
         }
 
