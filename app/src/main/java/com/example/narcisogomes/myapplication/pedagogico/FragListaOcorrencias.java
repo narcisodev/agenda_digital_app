@@ -51,6 +51,7 @@ public class FragListaOcorrencias extends Fragment {
             }
         });
         new BuscaOcorrencias().execute();
+
     }
 
 

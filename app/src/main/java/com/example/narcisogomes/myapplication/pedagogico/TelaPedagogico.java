@@ -15,8 +15,10 @@ import android.widget.TextView;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaAluno;
+import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterOcorrencias;
 import com.example.narcisogomes.myapplication.professor.FragTarefas;
 import com.example.narcisogomes.myapplication.professor.Values_professor;
+import com.example.narcisogomes.myapplication.util.Values;
 
 public class TelaPedagogico extends AppCompatActivity {
 
@@ -32,11 +34,18 @@ public class TelaPedagogico extends AppCompatActivity {
 
             switch (item.getItemId()) {
                 case R.id.navigation_inicio:
-
+                    Values_pedagogico.is_tela_l_o = false;
+                    Values_pedagogico.frag_a = "DASH";
                     fragment = new FragTelaInicial();
+                    invalidateOptionsMenu();
                     break;
                 case R.id.navigation_ocorrencias:
+                    Values_pedagogico.is_tela_l_o = true;
+                    Values_pedagogico.frag_a = "OCR";
                     fragment = new FragListaOcorrencias();
+                    invalidateOptionsMenu();
+
+
                     break;
             }
             if (fragment != null) {
@@ -70,25 +79,39 @@ public class TelaPedagogico extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pedagogico, menu);
 
-        MenuItem myActionMenuItem = menu.findItem(R.id.action_search_ped);
-        SearchView searchView = (SearchView) myActionMenuItem.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
-            }
+        if (Values_pedagogico.frag_a == "DASH") {
+            MenuItem menu_searItem = menu.findItem(R.id.action_search_ped);
+            menu_searItem.setVisible(false);
+        }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                if (TextUtils.isEmpty(newText)) {
-                    Values_pedagogico.listViewAdapterOcorrencias.filter("");
-                    Values_pedagogico.lv_ocorrencias.clearTextFilter();
-                } else {
-                    Values_pedagogico.listViewAdapterOcorrencias.filter(newText);
+        if (Values_pedagogico.frag_a == "OCR") {
+            MenuItem myActionMenuItem = menu.findItem(R.id.action_search_ped);
+            myActionMenuItem.setVisible(true);
+            SearchView searchView = (SearchView) myActionMenuItem.getActionView();
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    return false;
                 }
-                return true;
-            }
-        });
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    if(Values_pedagogico.is_tela_l_o){
+                        if (TextUtils.isEmpty(newText)) {
+                            Values_pedagogico.listViewAdapterOcorrencias = new ListViewAdapterOcorrencias();
+                            Values_pedagogico.listViewAdapterOcorrencias.filter("");
+                            Values_pedagogico.lv_ocorrencias.clearTextFilter();
+                        } else {
+                            Values_pedagogico.listViewAdapterOcorrencias.filter(newText);
+                        }
+                    }
+                    return true;
+                }
+            });
+        }
+
+
+
 
 
         return true;

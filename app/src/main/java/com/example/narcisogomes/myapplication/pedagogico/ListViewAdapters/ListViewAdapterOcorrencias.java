@@ -26,8 +26,12 @@ public class ListViewAdapterOcorrencias extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
-    List<Ocorrencia> modellist;
-    ArrayList<Ocorrencia> arrayList;
+    List<Ocorrencia> modellist = new ArrayList<>();
+    ArrayList<Ocorrencia> arrayList = new ArrayList<>();
+
+    public ListViewAdapterOcorrencias(){
+
+    }
 
     public ListViewAdapterOcorrencias(Context mContext, List<Ocorrencia> modellist) {
         this.mContext = mContext;
