@@ -1,6 +1,5 @@
 package com.example.narcisogomes.myapplication.aluno;
 
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.narcisogomes.myapplication.R;

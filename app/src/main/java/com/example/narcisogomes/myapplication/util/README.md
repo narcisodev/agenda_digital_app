@@ -19,3 +19,11 @@
 //COMANDOS PARA CONECTAR O CELULAR PELA REDE
 adb tcpip 5555
 adb connect IP_DO_DISPOSITIVO
+
+
+Adaptador de Rede sem Fio Wi-Fi:
+   Sufixo DNS específico de conexão. . . . . . :
+   Endereço IPv6 de link local . . . . . . . . : fe80::b9a9:e074:70ce:dc3%4
+   Endereço IPv4. . . . . . . .  . . . . . . . : 192.168.43.220
+   Máscara de Sub-rede . . . . . . . . . . . . : 255.255.255.0
+   Gateway Padrão. . . . . . . . . . . . . . . : 192.168.43.1
