@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:padding="10px"
+
                 android:textAlignment="textEnd"
                 android:id="@+id/id_ocorrencia"
                 android:layout_marginTop="10dp"
@@ -44,23 +44,47 @@
 
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Descrição:"
+            android:maxLength="150"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            />
+
+
+        <TextView
             android:id="@+id/descricao_ocorrencia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:text="Os alunos estavam correndo no corredor igual a um banco de doidos varridos, parece que não saber se comportar em um orgão decenteente precisam de corretibo"
             android:maxLength="150"
-            android:textColor="@color/colorText"
+            android:textColor="@color/primary_text"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="Alunos:"
+            android:maxLength="150"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
             />
 
         <TextView
-
+            android:textColor="@color/primary_text"
             android:layout_marginTop="1dp"
             android:id="@+id/alunos_ocorrencia"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLength="60"
+            android:singleLine="true"
             android:text="Lucas Souza, Mauro Fillho, André Nunes"
-            android:textColor="@color/colorPrimary"/>
+            />
 
     </LinearLayout>
 </LinearLayout>
