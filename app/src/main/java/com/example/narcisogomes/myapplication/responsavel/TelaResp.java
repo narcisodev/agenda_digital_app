@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
 import com.example.narcisogomes.myapplication.R;
 
 import com.example.narcisogomes.myapplication.util.SobreAct;
@@ -25,11 +26,15 @@ public class TelaResp extends AppCompatActivity {
             Fragment fragment = null;
             switch (item.getItemId()) {
                 case R.id.navigation_dashboard:
-                    fragment = new FragDashboard();break;
+                    fragment = new FragDashboard();
+                    break;
 
+                case R.id.navigation_oc_resp:
+                    fragment = new FragListaOcorrencia();
+                    break;
 
             }
-            if(fragment !=null){
+            if (fragment != null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, fragment).commit();
             }
             return true;
@@ -74,11 +79,11 @@ public class TelaResp extends AppCompatActivity {
             onBackPressed();
         }
 
-        if (id == R.id.action_config){
+        if (id == R.id.action_config) {
 
         }
 
-        if(id == R.id.action_sobre){
+        if (id == R.id.action_sobre) {
             startActivity(new Intent(getApplicationContext(), SobreAct.class));
         }
 

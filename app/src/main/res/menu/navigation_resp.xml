@@ -8,7 +8,7 @@
         android:title="@string/start" />
 
     <item
-        android:id="@+id/navigation_tarefas"
+        android:id="@+id/navigation_oc_resp"
         android:icon="@drawable/ic_assignment_24dp"
         android:title="@string/title_ocorrencias" />
 

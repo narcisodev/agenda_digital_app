@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:padding="10px"
+                android:textAlignment="textEnd"
+                android:id="@+id/id_ocorrencia"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1000"
+                android:textColor="@color/primary_text"
+                android:gravity="end"
+                />
+
+            <TextView
+                android:textAlignment="textEnd"
+                android:id="@+id/data_ocorrencia"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="20/04/1999"
+                android:textColor="@color/primary_text"
+                android:gravity="end"
+                />
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/descricao_ocorrencia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Os alunos estavam correndo no corredor igual a um banco de doidos varridos, parece que não saber se comportar em um orgão decenteente precisam de corretibo"
+            android:maxLength="150"
+            android:textColor="@color/colorText"
+            />
+
+        <TextView
+
+            android:layout_marginTop="1dp"
+            android:id="@+id/alunos_ocorrencia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLength="60"
+            android:text="Lucas Souza, Mauro Fillho, André Nunes"
+            android:textColor="@color/colorPrimary"/>
+
+    </LinearLayout>
+</LinearLayout>
