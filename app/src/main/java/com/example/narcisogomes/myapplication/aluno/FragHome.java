@@ -106,7 +106,7 @@ public class FragHome extends Fragment {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
-                    Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
                 }
 
             }
@@ -121,7 +121,7 @@ public class FragHome extends Fragment {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
-                    Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -135,7 +135,7 @@ public class FragHome extends Fragment {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
-                    Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
                 }
             }
         });

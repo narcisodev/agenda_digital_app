@@ -44,8 +44,6 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
         user = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.senha);
         this.alertDialog = criaAviso(""); //cria aviso para uso posterior
-        user.setText("thania");
-        pass.setText("123");
     }
 
     //quando usuario clicar no botão entrar
@@ -53,6 +51,13 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
         senha = pass.getText().toString();
         login = user.getText().toString();
         new buscaLogin().execute();
+    }
+
+    @Override
+    public void onBackPressed() {
+        user.setText("");
+        pass.setText("");
+        super.onBackPressed();
     }
 
     //cria diálogo de confirmação

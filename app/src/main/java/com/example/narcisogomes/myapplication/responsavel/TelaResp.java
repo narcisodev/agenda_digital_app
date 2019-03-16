@@ -1,10 +1,12 @@
 package com.example.narcisogomes.myapplication.responsavel;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.narcisogomes.myapplication.R;
 
+import com.example.narcisogomes.myapplication.pedagogico.TelaPedagogico;
 import com.example.narcisogomes.myapplication.responsavel.ListAdapters.ListViewAdapterOcorrencias;
 import com.example.narcisogomes.myapplication.util.SobreAct;
 
@@ -132,7 +135,7 @@ public class TelaResp extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.sair) {
-            onBackPressed();
+            alertConfirmaSair();
         }
 
         if (id == R.id.action_config) {
@@ -146,4 +149,34 @@ public class TelaResp extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+
+
+    private void alertConfirmaSair() {
+        AlertDialog alerta;
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Atenção!");
+        //define a mensagem
+        builder.setMessage("Tem serteza que deseja sair?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                TelaResp.super.onBackPressed();
+
+            }
+        });
+
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 }
