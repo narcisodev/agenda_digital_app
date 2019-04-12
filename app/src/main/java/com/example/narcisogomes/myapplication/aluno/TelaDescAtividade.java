@@ -23,32 +23,23 @@ public class TelaDescAtividade extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.aluno_activity_tela_desc_atividade);
-
         atv = Values_aluno.atividade_desc;
-
         titulo_atividade = findViewById(R.id.titulo_atividade);
         descricao_atividade = findViewById(R.id.descricao_atividade);
         data_criacao = findViewById(R.id.data_criacao);
         data_entrega = findViewById(R.id.data_entrega);
         disciplina = findViewById(R.id.disciplina);
         pontos = findViewById(R.id.pontos);
-
         pontos.setText(atv.pontos+"");
         titulo_atividade.setText(atv.titulo);
         descricao_atividade.setText(atv.descricao);
         data_criacao.setText(atv.datacriacao);
         data_entrega.setText(atv.data_entrega+"");
         disciplina.setText(atv.disiciplina);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Descrição da Atividade");
-
-
-
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) { super.onBackPressed(); return true; }
-
 }

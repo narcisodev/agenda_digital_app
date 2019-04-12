@@ -86,6 +86,10 @@ public class TelaResp extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        alertConfirmaSair();
+    }
 
 
     /*

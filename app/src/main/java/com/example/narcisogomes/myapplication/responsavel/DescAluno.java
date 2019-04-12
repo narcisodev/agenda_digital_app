@@ -1,6 +1,7 @@
 package com.example.narcisogomes.myapplication.responsavel;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,7 +28,6 @@ public class DescAluno extends AppCompatActivity {
     CardView atv_aula, rel_academico, cons_notas, cons_faltas;
     Aluno obj_aluno = new Aluno();
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +46,7 @@ public class DescAluno extends AppCompatActivity {
         atv_aula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(DescAluno.this, "ATIVIDADES DE AULA", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(DescAluno.this, ListaTarefasFilho.class));
             }
         });
 
@@ -74,9 +74,7 @@ public class DescAluno extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Descrição do Aluno");
-
         new CarregaDescAlunos().execute();
-
     }
 
     /*
@@ -87,7 +85,6 @@ public class DescAluno extends AppCompatActivity {
         super.onBackPressed();
         return true;
     }
-
 
     /*
      * BUSCAR DADOS DO ALUNO DE ACORDO COM O ID DA VALUES_RESP

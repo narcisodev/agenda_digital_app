@@ -1,4 +1,5 @@
 package com.example.narcisogomes.myapplication.util;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -29,7 +30,7 @@ import com.example.narcisogomes.myapplication.responsavel.Values_resp;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Login extends Activity implements DialogInterface.OnClickListener{
+public class Login extends Activity implements DialogInterface.OnClickListener {
 
     private EditText user;//campo de informação do usuario
     private EditText pass;//campo de informação da senha
@@ -37,6 +38,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
     private String login;//recebe o login quando o usuário clicar em logar
     private AlertDialog alertDialog;//recebe o alert dialog utilizado para informar se o login foi efetuado com sucesso
     private Usuario usuario = new Usuario();//guarda os dados do usuário logado
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,10 +46,12 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
         user = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.senha);
         this.alertDialog = criaAviso(""); //cria aviso para uso posterior
+        user.setText("narciso");
+        pass.setText("123");
     }
 
     //quando usuario clicar no botão entrar
-    public void logar(View v){
+    public void logar(View v) {
         senha = pass.getText().toString();
         login = user.getText().toString();
         new buscaLogin().execute();
@@ -61,7 +65,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
     }
 
     //cria diálogo de confirmação
-    private AlertDialog criaAviso(String aviso){
+    private AlertDialog criaAviso(String aviso) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(aviso);
         builder.setTitle("Atenção");
@@ -72,7 +76,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
     //chamado para cliques de botões do alertDialog
     @Override
     public void onClick(DialogInterface v, int item) {
-        switch (item){
+        switch (item) {
             case DialogInterface.BUTTON_POSITIVE:
                 alertDialog.hide();
                 break;
@@ -82,11 +86,11 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
 
 
     //se o usuario for autentico inicia a Dashboard (Inicial)
-    public void isLogado(int tipo_usuario){
+    public void isLogado(int tipo_usuario) {
         //startActivity(new Intent(this, DashDiscente.class));
         Values.usuario = usuario;
-        Log.e(Values.TAG, "ISLOGADP--VALOR: "+ tipo_usuario);
-        switch (tipo_usuario){
+        Log.e(Values.TAG, "ISLOGADP--VALOR: " + tipo_usuario);
+        switch (tipo_usuario) {
             case 1:
                 //PEDAGOGICO
                 startActivity(new Intent(Login.this, TelaPedagogico.class));
@@ -137,15 +141,13 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
         protected String doInBackground(String[]... strings) {
             String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=1&login="+login+"&senha="+senha);
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=1&login=" + login + "&senha=" + senha);
             } catch (Exception e) {
-                Toast.makeText(Login.this, "Erro: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(Login.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
             return ab;
 
         }
-
-
 
 
         @Override
@@ -157,7 +159,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
             try {
                 objeto = new JSONObject(responsebody);
                 boolean isLogado = objeto.getBoolean("success");
-                if(isLogado){
+                if (isLogado) {
                     JSONObject user = objeto.getJSONObject("dados");
                     int tipo_usuario = user.getInt("tipoUsuario_id");
                     usuario.setId_usuario(user.getInt("id_usuario"));
@@ -166,15 +168,13 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                     usuario.setEmail(user.getString("email"));
                     usuario.setTipoUsuario_id(user.getInt("tipoUsuario_id"));
 
-                    if(usuario.getTipoUsuario_id() ==1){
+                    if (usuario.getTipoUsuario_id() == 1) {
                         Pedagogico p = new Pedagogico();
                         p.setUsuario(usuario);
                         p.setId_pedagogico(user.getInt("id_pedagogico"));
                         p.setMatricula(user.getString("matricula"));
                         Values_pedagogico.ped_logado = p;
-                    }else
-
-                    if(usuario.getTipoUsuario_id() == 2){
+                    } else if (usuario.getTipoUsuario_id() == 2) {
                         Professor prof = new Professor();
                         prof.setUsuario(usuario);
                         prof.setId_professor(user.getInt("id_professor"));
@@ -184,8 +184,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                         JSONObject dados_a = objeto.getJSONObject("adicionais");
                         Values_professor.total_tarefas = dados_a.getInt("tarefas_cadastradas");
 
-                    }else
-                        if(usuario.getTipoUsuario_id() == 3){
+                    } else if (usuario.getTipoUsuario_id() == 3) {
                         Responsavel responsavel = new Responsavel();
                         responsavel.setUsuario(usuario);
                         responsavel.setRua(user.getString("rua"));
@@ -195,8 +194,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                         responsavel.setId_reponsavel(user.getInt("id_responsavel"));
                         Values_resp.resp_logado = responsavel;
 
-                    }else
-                        if(usuario.getTipoUsuario_id()==4){
+                    } else if (usuario.getTipoUsuario_id() == 4) {
                         Aluno aluno = new Aluno();
                         aluno.setUsuario(usuario);
                         aluno.setId_aluno(user.getInt("id_aluno"));
@@ -212,7 +210,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
                     dialog.hide();
                     isLogado(usuario.getTipoUsuario_id());
 
-                }else{
+                } else {
                     dialog.hide();
                     alertDialog = criaAviso(getResources().getString(R.string.login_errado));
                     alertDialog.show();
@@ -220,7 +218,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener{
 
             } catch (JSONException e) {
                 //exibe erro caso ocorra durante a leitura do JSON
-                Toast.makeText(getApplicationContext(), "Erro - Login: "+ e.getMessage(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Erro - Login: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 alertDialog.hide();
             }
         }

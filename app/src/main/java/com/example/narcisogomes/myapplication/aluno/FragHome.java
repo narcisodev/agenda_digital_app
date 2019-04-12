@@ -33,12 +33,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 public class FragHome extends Fragment {
-
     ArrayList<Atividade> lista_atv_urgentes = new ArrayList<>();
-
-    TextView txt_nome, txt_email, txt_login, txt_responsavel, txt_matricula,txt_curso,txt_turma;
-    TextView dt1, ta1, d1,dt2, ta2, d2,dt3, ta3, d3,id_atv_1,id_atv_2,id_atv_3;
-
+    TextView txt_nome, txt_email, txt_login, txt_responsavel, txt_matricula, txt_curso, txt_turma;
+    TextView dt1, ta1, d1, dt2, ta2, d2, dt3, ta3, d3, id_atv_1, id_atv_2, id_atv_3;
     LinearLayout atividade_1, atividade_2, atividade_3, sem_atividade, ver_mais;
     Atividade a = new Atividade();//obj usado para a passagem de parametros no Ask Task buscarTarefas
 
@@ -51,7 +48,6 @@ public class FragHome extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         txt_nome = view.findViewById(R.id.nome);
         txt_email = view.findViewById(R.id.email);
         txt_login = view.findViewById(R.id.login);
@@ -75,10 +71,7 @@ public class FragHome extends Fragment {
         id_atv_2 = view.findViewById(R.id.id_atividade_2);
         id_atv_3 = view.findViewById(R.id.id_atividade_3);
         ver_mais = view.findViewById(R.id.ver_mais);
-
-
         sem_atividade = view.findViewById(R.id.sem_atividade);
-
         txt_nome.setText(Values_aluno.aluno.getNome_usuario());
         txt_email.setText(Values_aluno.aluno.getEmail());
         txt_login.setText(Values_aluno.aluno.getLogin());
@@ -86,7 +79,6 @@ public class FragHome extends Fragment {
         txt_matricula.setText(Values_aluno.aluno.getMatricula());
         txt_curso.setText(Values_aluno.aluno.getCurso());
         txt_turma.setText(Values_aluno.aluno.getTurma());
-
         ver_mais.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,29 +87,25 @@ public class FragHome extends Fragment {
                 //startActivity(new Intent(getContext(), TelaTodasAtividades.class));
             }
         });
-
         atividade_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 int id = Integer.parseInt((String) id_atv_1.getText());
                 Atividade a = buscarAtividadePeloID(id);
-                if(a != null){
+                if (a != null) {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
                     //Toast.makeText(getContext(), "ID ATIVIDADE: "+ a.id_atividade+"\n TÍTULO: "+ a.titulo, Toast.LENGTH_LONG).show();
                 }
-
             }
         });
-
         atividade_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int id = Integer.parseInt((String) id_atv_2.getText());
                 Atividade a = buscarAtividadePeloID(id);
-                if(a != null){
+                if (a != null) {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
@@ -131,7 +119,7 @@ public class FragHome extends Fragment {
             public void onClick(View v) {
                 int id = Integer.parseInt((String) id_atv_3.getText());
                 Atividade a = buscarAtividadePeloID(id);
-                if(a != null){
+                if (a != null) {
                     Values_aluno.is_obj = true;
                     Values_aluno.atividade_desc = a;
                     startActivity(new Intent(getContext(), TelaDescAtividade.class));
@@ -143,12 +131,10 @@ public class FragHome extends Fragment {
         new CarregaAtividades().execute();
     }
 
-
     /**
-    * MÉTODO QUE GERENCIA AS TAREFAS URGENTES
-    * */
+     * MÉTODO QUE GERENCIA AS TAREFAS URGENTES
+     */
     private void tratarExibicaoTarefas() {
-
         sem_atividade.setVisibility(View.GONE);
         ver_mais.setVisibility(View.GONE);
         if (lista_atv_urgentes.size() >= 3) {
@@ -157,65 +143,58 @@ public class FragHome extends Fragment {
             ta1.setText(a.titulo);
             d1.setText(a.disiciplina);
             id_atv_1.setVisibility(View.GONE);
-            id_atv_1.setText(a.id_atividade+"");
+            id_atv_1.setText(a.id_atividade + "");
 
             a = lista_atv_urgentes.get(1);
             dt2.setText(a.data_entrega);
             ta2.setText(a.titulo);
             d2.setText(a.disiciplina);
             id_atv_2.setVisibility(View.GONE);
-            id_atv_2.setText(a.id_atividade+"");
+            id_atv_2.setText(a.id_atividade + "");
 
             a = lista_atv_urgentes.get(2);
             dt3.setText(a.data_entrega);
             ta3.setText(a.titulo);
             d3.setText(a.disiciplina);
             id_atv_3.setVisibility(View.GONE);
-            id_atv_3.setText(a.id_atividade+"");
-            if(lista_atv_urgentes.size() > 3){
+            id_atv_3.setText(a.id_atividade + "");
+            if (lista_atv_urgentes.size() > 3) {
                 ver_mais.setVisibility(View.VISIBLE);
             }
-
-        }else
-
-        if (lista_atv_urgentes.size() == 2) {
+        } else if (lista_atv_urgentes.size() == 2) {
             a = lista_atv_urgentes.get(0);
             dt1.setText(a.data_entrega);
             ta1.setText(a.titulo);
             d1.setText(a.disiciplina);
-            id_atv_1.setText(a.id_atividade+"");
-
+            id_atv_1.setText(a.id_atividade + "");
             a = lista_atv_urgentes.get(1);
             dt2.setText(a.data_entrega);
             ta2.setText(a.titulo);
             d2.setText(a.disiciplina);
-            id_atv_2.setText(a.id_atividade+"");
+            id_atv_2.setText(a.id_atividade + "");
             atividade_3.setVisibility(View.GONE);
-        }else
-
-        if (lista_atv_urgentes.size() == 1) {
+        } else if (lista_atv_urgentes.size() == 1) {
             a = lista_atv_urgentes.get(0);
             dt1.setText(a.data_entrega);
             ta1.setText(a.titulo);
             d1.setText(a.disiciplina);
-            id_atv_1.setText(a.id_atividade+"");
+            id_atv_1.setText(a.id_atividade + "");
             atividade_2.setVisibility(View.GONE);
             atividade_3.setVisibility(View.GONE);
-        }else if(lista_atv_urgentes.size() == 0){
+        } else if (lista_atv_urgentes.size() == 0) {
             atividade_1.setVisibility(View.GONE);
             atividade_2.setVisibility(View.GONE);
             atividade_3.setVisibility(View.GONE);
             sem_atividade.setVisibility(View.VISIBLE);
-
         }
     }
 
 
-    private Atividade buscarAtividadePeloID(int id){
+    private Atividade buscarAtividadePeloID(int id) {
         Atividade a = new Atividade();
-        for(int i = 0; i < lista_atv_urgentes.size(); i++){
+        for (int i = 0; i < lista_atv_urgentes.size(); i++) {
             a = lista_atv_urgentes.get(i);
-            if(a.id_atividade == id){
+            if (a.id_atividade == id) {
                 return a;
             }
         }
@@ -224,11 +203,9 @@ public class FragHome extends Fragment {
     }
 
 
-
-
     /**
-    * A TASK PARA CARREGAR AS TAREFAS URGENTES
-    * */
+     * A TASK PARA CARREGAR AS TAREFAS URGENTES
+     */
 
     private class CarregaAtividades extends AsyncTask<Void, Void, String> {
         private ProgressDialog dialog;
@@ -289,9 +266,5 @@ public class FragHome extends Fragment {
             dialog.hide();
         }
     }
-
-
-
-
 }
 

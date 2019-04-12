@@ -49,7 +49,8 @@
         <activity android:name=".pedagogico.ListaCursos" />
         <activity android:name=".pedagogico.ListaProfessores" />
         <activity android:name=".pedagogico.CadastroOcorrencia" />
-        <activity android:name=".pedagogico.DescOcorrencia"></activity>
+        <activity android:name=".pedagogico.DescOcorrencia" />
+        <activity android:name=".responsavel.ListaTarefasFilho"></activity>
     </application>
 
 </manifest>

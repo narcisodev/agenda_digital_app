@@ -38,11 +38,8 @@ public class TelaProfessor extends AppCompatActivity {
                     if (Values_professor.total_tarefas == 0) {
                         fragment = new Mensagens();
                     } else {
-
                         fragment = new FragTarefas();
-
                     }
-
                     break;
                 case R.id.navigation_home:
                     frag_ativo = "frag_home";
@@ -55,8 +52,6 @@ public class TelaProfessor extends AppCompatActivity {
                     */
             }
             if (fragment != null) {
-
-
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, fragment).commit();
             }
             return true;
@@ -80,8 +75,6 @@ public class TelaProfessor extends AppCompatActivity {
 
     /*
      * CRIAÇÃO E CONTROLE DO MENU
-     *
-     *
      * */
 
     @Override
@@ -89,7 +82,7 @@ public class TelaProfessor extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_professor, menu);
 
-        MenuItem myActionMenuItem= menu.findItem(R.id.app_bar_search_prof);
+        MenuItem myActionMenuItem = menu.findItem(R.id.app_bar_search_prof);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -99,16 +92,15 @@ public class TelaProfessor extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
+                if (TextUtils.isEmpty(newText)) {
                     Values_professor.listViewAdapterAtividades.filter("");
                     Values_professor.lista_atv.clearTextFilter();
-                }else{
+                } else {
                     Values_professor.listViewAdapterAtividades.filter(newText);
                 }
                 return true;
             }
         });
-
         return true;
     }
 
@@ -124,23 +116,23 @@ public class TelaProfessor extends AppCompatActivity {
         }
 
         if (id == R.id.navigation_refresh_prof) {
-            if(frag_ativo == "frag_tarefas"){
+            if (frag_ativo == "frag_tarefas") {
                 if (Values_professor.total_tarefas == 0) {
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, new Mensagens()).commit();
                 } else {
-
                     getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, new FragTarefas()).commit();
-
                 }
-
-            }else
-            if(frag_ativo == "frag_home"){
+            } else if (frag_ativo == "frag_home") {
                 getSupportFragmentManager().beginTransaction().replace(R.id.frame_fragments, new FragHome()).commit();
             }
         }
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        alertConfirmaSair();
+    }
 
     private void alertConfirmaSair() {
         //Cria o gerador do AlertDialog
@@ -152,8 +144,7 @@ public class TelaProfessor extends AppCompatActivity {
         //define um botão como positivo
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                onBackPressed();
-
+                TelaProfessor.super.onBackPressed();
             }
         });
 

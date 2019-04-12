@@ -36,7 +36,6 @@ public class FragDashboard extends Fragment {
     ArrayList<Aluno> al_alunos = new ArrayList<>();
     List<Map<String, Object>> lis_alunos_map = new ArrayList<>();
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -59,20 +58,16 @@ public class FragDashboard extends Fragment {
         txt_bairro.setText("Bairro: "+r.getBairro());
         txt_numero.setText("Número: "+r.getNumero());
 
-
         lista_alunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Map<String, Object> aluno= lis_alunos_map.get(position);
                 Values_resp.id_aluno_selecionado = (Integer) aluno.get("id");
-                Toast.makeText(getContext(), "Aluno: " + aluno.get("nome"), Toast.LENGTH_LONG).show();
+                Values_resp.turma_aluno_selecionado = Integer.parseInt((String) aluno.get("turma"));
                 startActivity(new Intent(getActivity(), DescAluno.class));
             }
         });
-
         new CarregaAlunos().execute();
-
-
     }
 
     private List<Map<String,Object>> listarAlunos(){
@@ -84,6 +79,7 @@ public class FragDashboard extends Fragment {
             item.put("id", a.getId_aluno());
             item.put("nome", a.getNome_usuario());
             item.put("curso", a.getCurso());
+            item.put("turma", a.getTurma());
             lis_alunos_map.add(item);
             item = new HashMap<String, Object>();
             a = new Aluno();
@@ -133,6 +129,7 @@ public class FragDashboard extends Fragment {
                         aluno_obj.setId_aluno(aln_json.getInt("id_aluno"));
                         aluno_obj.setNome_usuario(aln_json.getString("nome"));
                         aluno_obj.setCurso(aln_json.getString("curso"));
+                        aluno_obj.setTurma(aln_json.getString("turma"));
                         al_alunos.add(aluno_obj);
                         aluno_obj = new Aluno();
                     }

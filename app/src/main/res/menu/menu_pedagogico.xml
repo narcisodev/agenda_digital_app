@@ -9,7 +9,6 @@
         app:actionViewClass="android.support.v7.widget.SearchView"
         app:showAsAction="always" />
 
-
     <item
         android:id="@+id/action_refresh_ped"
         android:icon="@drawable/ic_autorenew_white_24dp"
@@ -17,12 +16,18 @@
         app:showAsAction="always"
         android:visible="false"/>
 
-
     <item
         android:id="@+id/action_logoff_ped"
         android:icon="@drawable/ic_exit_to_app_24dp"
         android:title="@string/sair"
         app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_my_occ"
+        android:icon="@drawable/ic_exit_to_app_24dp"
+        android:title="@string/minha_occ"
+        />
+
 
 
 </menu>

@@ -1,4 +1,4 @@
-package com.example.narcisogomes.myapplication.aluno.ListAdapters;
+package com.example.narcisogomes.myapplication.responsavel.ListAdapters;
 
 import android.content.Context;
 import android.content.Intent;
@@ -7,15 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaDescAtividade;
 import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Atividade;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import com.example.narcisogomes.myapplication.R;
+
 public class ListViewAdapterAtividades extends BaseAdapter {
 
     Context mContext;
