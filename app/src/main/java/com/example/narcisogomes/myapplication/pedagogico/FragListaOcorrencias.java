@@ -43,7 +43,6 @@ public class FragListaOcorrencias extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Values_pedagogico.lv_ocorrencias = view.findViewById(R.id.lista_ocorrencias);
         fab = view.findViewById(R.id.fab);
-
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,7 +50,6 @@ public class FragListaOcorrencias extends Fragment {
             }
         });
         new BuscaOcorrencias().execute();
-
     }
 
 

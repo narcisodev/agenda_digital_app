@@ -15,6 +15,20 @@
         android:orientation="vertical"
         android:background="@color/grayligth">
 
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/desc_arquivada"
+            android:layout_width="408dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@color/red"
+            android:padding="5dp"
+            android:text="@string/descricao_arquivada"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
         <TextView
             android:textStyle="bold"
             android:padding="5dp"
@@ -23,8 +37,6 @@
             android:textSize="16dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
             android:text="DESCRIÇÃO"/>
 
         <TextView
@@ -34,8 +46,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
             android:padding="5dp"
             />
 
@@ -47,9 +57,7 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="DATA DA OCORRÊNCIA"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
+            android:text="@string/data_occ"
             android:layout_marginTop="8dp"/>
 
 
@@ -60,8 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#fff"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="8dp"
             android:padding="5dp"
             />
 
@@ -73,10 +79,8 @@
             android:textColor="@color/white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
-            android:text="ALUNOS"/>
+            android:text="@string/alunos"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -84,8 +88,6 @@
 
             <com.example.narcisogomes.myapplication.util.ListViewPersoN
                 android:padding="5dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
                 android:background="#fff"
                 android:id="@+id/lista_alunos_oc"
                 android:layout_width="match_parent"
@@ -97,6 +99,27 @@
 
 
         </RelativeLayout>
+        <TextView
+            android:textStyle="bold"
+            android:padding="5dp"
+            android:background="@color/green"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/reg_por"
+            android:layout_marginTop="8dp"/>
+
+
+        <TextView
+            android:textSize="16dp"
+            android:textColor="@color/primary_text"
+            android:id="@+id/ped_reg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:padding="5dp"
+            />
 
 
 

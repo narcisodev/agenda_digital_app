@@ -21,7 +21,7 @@ import com.example.narcisogomes.myapplication.professor.Values_professor;
 import com.example.narcisogomes.myapplication.util.Values;
 
 public class TelaPedagogico extends AppCompatActivity {
-
+    boolean ver_menu_minhas_occ = false;
     AlertDialog alerta;
     int count_menu = 0;
 
@@ -31,7 +31,6 @@ public class TelaPedagogico extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment = null;
-
             switch (item.getItemId()) {
                 case R.id.navigation_inicio:
                     Values_pedagogico.is_tela_l_o = false;
@@ -44,8 +43,6 @@ public class TelaPedagogico extends AppCompatActivity {
                     Values_pedagogico.frag_a = "OCR";
                     fragment = new FragListaOcorrencias();
                     invalidateOptionsMenu();
-
-
                     break;
             }
             if (fragment != null) {
@@ -78,15 +75,22 @@ public class TelaPedagogico extends AppCompatActivity {
         count_menu++;
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_pedagogico, menu);
-
         if (Values_pedagogico.frag_a == "DASH") {
             MenuItem menu_searItem = menu.findItem(R.id.action_search_ped);
             menu_searItem.setVisible(false);
+            MenuItem myActionMenuItem = menu.findItem(R.id.action_my_occ);
+            myActionMenuItem.setVisible(false);
+            MenuItem myActionMenuItem2 = menu.findItem(R.id.action_occ_arq);
+            myActionMenuItem2.setVisible(false);
         }
 
         if (Values_pedagogico.frag_a == "OCR") {
             MenuItem myActionMenuItem = menu.findItem(R.id.action_search_ped);
             myActionMenuItem.setVisible(true);
+            MenuItem myActionMenuItem1 = menu.findItem(R.id.action_my_occ);
+            myActionMenuItem1.setVisible(true);
+            MenuItem myActionMenuItem2 = menu.findItem(R.id.action_occ_arq);
+            myActionMenuItem2.setVisible(true);
             SearchView searchView = (SearchView) myActionMenuItem.getActionView();
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
                 @Override
@@ -109,11 +113,6 @@ public class TelaPedagogico extends AppCompatActivity {
                 }
             });
         }
-
-
-
-
-
         return true;
     }
 

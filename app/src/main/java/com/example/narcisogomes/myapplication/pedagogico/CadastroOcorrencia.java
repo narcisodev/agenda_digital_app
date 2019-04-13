@@ -20,6 +20,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Aluno;
@@ -44,8 +45,10 @@ public class CadastroOcorrencia extends AppCompatActivity {
     ListView lv_alunos_oc;
     int mes, ano, dia, hora, minuto, segundo, horat, minutot;
     Button data_oc, cad_oc;
-
     Ocorrencia ocorrencia_c;
+
+    boolean is_cad = true; //cadastra ou edita
+    int data_alterou = 0; //controle para saber se o usuario alterou a data - usado apenas para a edição / 0 - não mexeu - 1 mexeu
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +75,7 @@ public class CadastroOcorrencia extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
-        getSupportActionBar().setTitle("Cadastro de Ocorrência");
+        getSupportActionBar().setTitle(R.string.cad_occ);
 
         //CONFIG DATA ENTREGA
         Calendar calendar = Calendar.getInstance();
@@ -84,44 +87,77 @@ public class CadastroOcorrencia extends AppCompatActivity {
         segundo = calendar.get(Calendar.SECOND);
         horat = hora;
         minutot = minuto;
-
         data_oc.setText(Util.formataHora(dia) + "/" + Util.transformaMes(mes) + "/" + ano + "-" + Util.formataHora(hora) + ":" + Util.formataHora(minuto));
+        Values_pedagogico.lista_alunos.clear();
 
-        /*
-        String[] city_names = {"Óbidos", "Santarém", "Manaus", "Mondongo", "Santos", "Rio de Janeiro", "Fumaça", "Loucuara", "Belterra", "Peixe Boi", "Santa Helema", "Mario Santos", "Junior Gustavo"};
-        ArrayAdapter a = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, city_names);
-        lv_alunos_oc.setAdapter(a);
-        */
+        //SE FOR EDITAR O ALUNO FAZ ISSO
+        if (Values_pedagogico.is_editar) {
+            Ocorrencia o = Values_pedagogico.ocorrencia_editar;
+            Values_pedagogico.lista_alunos = o.getArray_alunos();
+            txt_descrica.setText(o.getDescricao());
+            data_oc.setText(o.getData());
+            lvaa = new ListViewAdapterAlunosOcorrencia(CadastroOcorrencia.this, o.getArray_alunos());
+            lv_alunos_oc.setAdapter(lvaa);
+            cad_oc.setText("ATUALIZAR");
+            getSupportActionBar().setTitle(R.string.edicao_occ);
+            cad_oc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    atualizarOcorrencia();
+                }
+            });
+            Values_pedagogico.is_editar = false;
+        }
     }
 
+    private void atualizarOcorrencia() {
+        Log.e("2222", "Ocorrencia Atualizar " + Values_pedagogico.ocorrencia_editar.getId());
+        String descricao = txt_descrica.getText().toString();
+        descricao = descricao.replaceAll(" ", "");
+        if (descricao.length() == 0) {
+            Toast.makeText(CadastroOcorrencia.this, "Por favor informe a descrição da ocorrencia", Toast.LENGTH_SHORT).show();
+        } else if (Values_pedagogico.lista_alunos.size() == 0) {
+            Toast.makeText(CadastroOcorrencia.this, "Você precisa adicionar ao menos um aluno para poder cadastrar a ocorrência.", Toast.LENGTH_LONG).show();
+        } else {
+            ocorrencia_c = Values_pedagogico.ocorrencia_editar;
+            ocorrencia_c.setDescricao(txt_descrica.getText().toString());
+            //verifica se a data da ocorrência foi alterada
+            if(data_alterou == 1){
+                ocorrencia_c.setData(ano + "-" + Util.transformaMes(mes + 1) + "-" + Util.formataHora(dia) + " " + Util.formataHora(horat) + ":" + Util.formataHora(minutot) + ":00");
+            }else{
+                ocorrencia_c.setData(ocorrencia_c.getData_bd());
+            }
+            is_cad = false;
+            new CadastrarOcorrencia().execute();
+        }
+    }
 
-    private void cadastrarOcorrencia(){
+    private void cadastrarOcorrencia() {
 
         String descricao = txt_descrica.getText().toString();
-        descricao = descricao.replaceAll(" ", "" );
+        descricao = descricao.replaceAll(" ", "");
 
-        if(descricao.length() == 0){
-            Toast.makeText(CadastroOcorrencia.this, "Por favor informe a descrição da ocorrencia",Toast.LENGTH_SHORT).show();
-        }else if(Values_pedagogico.lista_alunos.size()==0){
-            Toast.makeText(CadastroOcorrencia.this, "Você precisa adicionar ao menos um aluno para poder cadastrar a ocorrência.",Toast.LENGTH_LONG).show();
-        }else{
+        if (descricao.length() == 0) {
+            Toast.makeText(CadastroOcorrencia.this, "Por favor informe a descrição da ocorrencia", Toast.LENGTH_SHORT).show();
+        } else if (Values_pedagogico.lista_alunos.size() == 0) {
+            Toast.makeText(CadastroOcorrencia.this, "Você precisa adicionar ao menos um aluno para poder cadastrar a ocorrência.", Toast.LENGTH_LONG).show();
+        } else {
             ocorrencia_c = new Ocorrencia();
             ocorrencia_c.setDescricao(txt_descrica.getText().toString());
-            ocorrencia_c.setData(ano+"-"+Util.transformaMes(mes+1)+"-"+Util.formataHora(dia)+" "+Util.formataHora(horat)+":"+Util.formataHora(minutot)+":00");
+            ocorrencia_c.setData(ano + "-" + Util.transformaMes(mes + 1) + "-" + Util.formataHora(dia) + " " + Util.formataHora(horat) + ":" + Util.formataHora(minutot) + ":00");
+            is_cad = true;
             new CadastrarOcorrencia().execute();
         }
 
     }
 
 
-    private void limpaForm(){
+    private void limpaForm() {
         txt_descrica.setText("");
         Values_pedagogico.lista_alunos.clear();
         lvaa = new ListViewAdapterAlunosOcorrencia(CadastroOcorrencia.this, Values_pedagogico.lista_alunos);
         lv_alunos_oc.setAdapter(lvaa);
     }
-
-
 
 
     @Override
@@ -142,10 +178,10 @@ public class CadastroOcorrencia extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if(id == R.id.add_alunos){
+        if (id == R.id.add_alunos) {
             Values_pedagogico.is_tela_oc = true;
             startActivity(new Intent(CadastroOcorrencia.this, ListaAlunos.class));
-        }else{
+        } else {
             onBackPressed();
         }
         return true;
@@ -174,12 +210,10 @@ public class CadastroOcorrencia extends AppCompatActivity {
             return new DatePickerDialog(this,
                     listener, ano, mes, dia);
         }
-
-
         return null;
     }
 
-    private void timePicker(){
+    private void timePicker() {
         // Get Current Time
         final Calendar c = Calendar.getInstance();
         hora = c.get(Calendar.HOUR_OF_DAY);
@@ -193,7 +227,8 @@ public class CadastroOcorrencia extends AppCompatActivity {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         horat = hourOfDay;
                         minutot = minute;
-                        data_oc.setText(Util.formataHora(dia) + "/" + Util.transformaMes(mes+1) + "/" + ano + " - " + Util.formataHora(horat) + ":" + Util.formataHora(minutot));
+                        data_oc.setText(Util.formataHora(dia) + "/" + Util.transformaMes(mes + 1) + "/" + ano + " - " + Util.formataHora(horat) + ":" + Util.formataHora(minutot));
+                        data_alterou = 1;
                     }
                 }, hora, minuto, true);
         timePickerDialog.show();
@@ -209,16 +244,14 @@ public class CadastroOcorrencia extends AppCompatActivity {
         //define um botão como positivo
         builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
-                for(Aluno a: Values_pedagogico.lista_alunos){
-                    if(a.getId_aluno() == id){
+                for (Aluno a : Values_pedagogico.lista_alunos) {
+                    if (a.getId_aluno() == id) {
                         Values_pedagogico.lista_alunos.remove(a);
                         break;
                     }
                 }
-
                 lvaa = new ListViewAdapterAlunosOcorrencia(CadastroOcorrencia.this, Values_pedagogico.lista_alunos);
                 lv_alunos_oc.setAdapter(lvaa);
-
             }
         });
 
@@ -237,8 +270,8 @@ public class CadastroOcorrencia extends AppCompatActivity {
 
 
     /*
-    * Cadastrar ocorrência
-    * */
+     * Cadastrar ocorrência
+     * */
 
     private class CadastrarOcorrencia extends AsyncTask<Void, Void, String> {
 
@@ -256,25 +289,32 @@ public class CadastroOcorrencia extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             String ab = "";
 
-            String id_alunos="";
+            String id_alunos = "";
             int tamanho_lista = Values_pedagogico.lista_alunos.size() - 1;
-            for (int i = 0; i< Values_pedagogico.lista_alunos.size(); i++){
-                if(i == tamanho_lista){
+            for (int i = 0; i < Values_pedagogico.lista_alunos.size(); i++) {
+                if (i == tamanho_lista) {
                     Aluno a = Values_pedagogico.lista_alunos.get(i);
-                    id_alunos+=a.getId_aluno();
-                }else{
+                    id_alunos += a.getId_aluno();
+                } else {
                     Aluno a = Values_pedagogico.lista_alunos.get(i);
-                    id_alunos+=a.getId_aluno()+",";
+                    id_alunos += a.getId_aluno() + ",";
                 }
-
             }
 
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=15" +
+                String acao;
+                if (is_cad) {
+                    acao = "15";
+                } else {
+                    acao = "16";
+                }
+
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=" + acao +
+                        "&id_ocorrencia=" + ocorrencia_c.getId() +
                         "&descricao=" + ocorrencia_c.getDescricao() +
                         "&datacriacao=" + ocorrencia_c.getData() +
-                        "&id_ped=" + Values_pedagogico.ped_logado.getId_pedagogico()+
-                        "&alunos_oc="+id_alunos);
+                        "&id_ped=" + Values_pedagogico.ped_logado.getId_pedagogico() +
+                        "&alunos_oc=" + id_alunos);
 
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
@@ -292,17 +332,21 @@ public class CadastroOcorrencia extends AppCompatActivity {
                 String mensagem = objeto.getString("message");
                 if (is) {
                     Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_LONG).show();
-                    limpaForm();
+                    if (!is_cad) {
+                        Values_pedagogico.pesquisa_ocorrencia_novamente = true;
+                        onBackPressed();
+                    } else {
+                        limpaForm();
+                    }
+
                 } else {
                     Toast.makeText(getApplicationContext(), "Erro ao salvar a tarefa: " + mensagem, Toast.LENGTH_LONG).show();
                 }
             } catch (JSONException e) {
+                Log.e("NARCISO02", strings);
                 Toast.makeText(getApplicationContext(), "Erro 003: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-
         }
-
-
     }
 }
 

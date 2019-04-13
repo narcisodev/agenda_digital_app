@@ -61,4 +61,16 @@
     <string name="todas">Todas</string>
     <string name="add_alunos">Adicionar Alunos</string>
     <string name="minha_occ">Minhas Ocorrências</string>
+    <string name="occ_arq">Ocorrências Arquivadas</string>
+    <string name="edicao_occ">Edição de Ocorrência</string>
+    <string name="cad_occ">Cadastro de Ocorrência</string>
+    <string name="confirma_arquivar">Tem certeza que deseja arquivar esta ocorrência?</string>
+    <string name="atencao">Atenção</string>
+    <string name="sim">Sim</string>
+    <string name="nao">Não</string>
+    <string name="arquivando_occ">Arquivando Ocorrência...</string>
+    <string name="descricao_arquivada">Descrição Arquivada</string>
+    <string name="data_occ">DATA DA OCORRÊNCIA</string>
+    <string name="alunos">ALUNOS</string>
+    <string name="reg_por">REGISTRADO POR</string>
 </resources>
