@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.example.narcisogomes.myapplication.R;
+import com.example.narcisogomes.myapplication.util.Values;
 
 public class FragConsultarFaltas extends Fragment {
 
@@ -35,6 +36,7 @@ public class FragConsultarFaltas extends Fragment {
         superProgressBar.setMax(100);
 
         superWebView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=http://portalfns.saude.gov.br/images/banners/Sigem/Portaria_448_de_13_de_Setembro_de_2002.pdf");
+        //superWebView.loadUrl("https://drive.google.com/viewerng/viewer?embedded=true&url=http://192.168.43.220:8080/proj/files/teste.pdf");
         superWebView.getSettings().setJavaScriptEnabled(true);
         superWebView.setWebChromeClient(new WebChromeClient(){
             @Override

@@ -15,46 +15,6 @@
             android:orientation="vertical">
 
             <LinearLayout
-                style="@style/AppTheme"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@color/colorPrimary"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:padding="25dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/bem_vindo"
-                    android:textColor="@color/white"
-                    android:textSize="40sp" />
-
-                <TextView
-
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="@string/saudacao"
-                    android:textAlignment="center"
-                    android:textColor="#fff"
-                    android:textSize="15sp" />
-
-                <Button
-                    android:id="@+id/primeiro_acesso"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/button_white_border"
-                    android:foreground="?android:attr/selectableItemBackground"
-                    android:text="@string/primeiro_acesso"
-                    android:textColor="#fff" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
@@ -62,7 +22,7 @@
                 android:padding="12dp">
 
                 <EditText
-                    android:id="@+id/usuario"
+                    android:id="@+id/login"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:drawableLeft="@drawable/ic_person_24dp"
@@ -84,16 +44,20 @@
 
                     />
 
-                <CheckBox
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:text="Salvar minhas credenciais"
-                    android:textColor="#999797"
-                    android:textColorHint="@color/colorText" />
+                <EditText
+                    android:id="@+id/conf_senha"
+                    android:layout_width="300dp"
+                    android:layout_height="50dp"
+                    android:drawableLeft="@drawable/ic_lock_24dp"
+                    android:drawablePadding="10dp"
+                    android:hint="Confirmação da senha"
+                    android:inputType="textPassword"
+                    android:textColor="@color/colorText"
+                    android:textColorHint="@color/colorText"
+                    />
 
                 <Button
+                    android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
@@ -102,7 +66,7 @@
                     android:drawablePadding="5dp"
                     android:foreground="?android:attr/selectableItemBackground"
                     android:onClick="logar"
-                    android:text="Entrar"
+                    android:text="@string/register"
                     android:textColor="#fff" />
 
             </LinearLayout>

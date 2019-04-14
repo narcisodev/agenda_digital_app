@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Values {
     //DADOS GERAIS USADOS PARA AS CONFIGURAÇÕES DO APK
-    public static final String URL_SERVICE = "http://192.168.43.220:8080/proj/adservice/solicita.php";
+    public static final String URL_SERVICE = "http://10.0.0.106:8080/proj/adservice/solicita.php";
     public static Usuario usuario = new Usuario();//guarda os dados do usuário logado para todos as activity de acesso
     public static String TAG = "1T22";
     public static Responsavel responsavel = new Responsavel();

@@ -79,4 +79,13 @@
     <string name="confirma_reabrir">Tem certeza que deseja reabrir esta ocorrência?</string>
     <string name="reabrindo_occ">Reabrindo Ocorrência</string>
     <string name="occ_abertas">Ocorrências Abertas</string>
+    <string name="primeiro_acesso">Primeiro acesso?</string>
+    <string name="conf_senha">Confirme sua senha</string>
+    <string name="register">Registrar</string>
+    <string name="senhas_n_coicidem">As senhas informadas não coincidem</string>
+    <string name="senhas_informe">Informe a sua senha</string>
+    <string name="login_informe">Informe o seu login</string>
+    <string name="senhas_confirme_informe">Confirme a sua senha</string>
+    <string name="title_atenction">Atenção</string>
+    <string name="title_sucess">Sucesso</string>
 </resources>
