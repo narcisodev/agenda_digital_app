@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.aluno.TelaAluno;
@@ -23,6 +24,7 @@ import com.example.narcisogomes.myapplication.util.Values;
 public class TelaPedagogico extends AppCompatActivity {
     boolean ver_menu_minhas_occ = false;
     AlertDialog alerta;
+    FragListaOcorrencias fragListaOcorrencias = null;
     int count_menu = 0;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -41,7 +43,8 @@ public class TelaPedagogico extends AppCompatActivity {
                 case R.id.navigation_ocorrencias:
                     Values_pedagogico.is_tela_l_o = true;
                     Values_pedagogico.frag_a = "OCR";
-                    fragment = new FragListaOcorrencias();
+                    fragListaOcorrencias = new FragListaOcorrencias();
+                    fragment = fragListaOcorrencias;
                     invalidateOptionsMenu();
                     break;
             }
@@ -120,6 +123,17 @@ public class TelaPedagogico extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
+        if(id == R.id.action_my_occ){
+            fragListaOcorrencias.buscarMinhasOcorrencias();
+        }
+
+        if(id == R.id.action_occ_arq){
+            fragListaOcorrencias.buscarOcorrenciasArquivadas();
+        }
+
+        if(id == R.id.action_occ_abertas){
+            fragListaOcorrencias.buscarOcorrenciasAbertas();
+        }
 
         if (id == R.id.action_search_ped) {
 

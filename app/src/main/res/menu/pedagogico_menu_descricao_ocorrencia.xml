@@ -6,11 +6,21 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         android:icon="@drawable/ic_edit_white_24dp"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/ped_menu_action_arquivar_occ"
         android:orderInCategory="100"
         android:title="@string/action_settings"
         android:icon="@drawable/icon_arquivar"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
+
+    <item
+        android:visible="false"
+        android:id="@+id/ped_menu_action_reabrir_occ"
+        android:orderInCategory="100"
+        android:title="@string/action_reabrir"
+        android:icon="@drawable/icon_reabrir"
+        app:showAsAction="always" />
+
+
 </menu>

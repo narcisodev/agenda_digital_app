@@ -31,6 +31,7 @@ public class FragListaOcorrencias extends Fragment {
     private ArrayList<Ocorrencia> al_ocorrencias = new ArrayList<>();
     private ListViewAdapterOcorrencias lavo;
     FloatingActionButton fab;
+    String parametros_ocorrencia = "";
 
     @Nullable
     @Override
@@ -49,6 +50,22 @@ public class FragListaOcorrencias extends Fragment {
                 startActivity(new Intent(getContext(), CadastroOcorrencia.class));
             }
         });
+        new BuscaOcorrencias().execute();
+    }
+
+    public void buscarMinhasOcorrencias(){
+        parametros_ocorrencia = "&my_occ=true&id_ped="+Values_pedagogico.ped_logado.getId_pedagogico();
+        new BuscaOcorrencias().execute();
+        //Toast.makeText(getContext(), "MINHAS OCORRÊNCIAS", Toast.LENGTH_LONG).show();
+    }
+
+    public void buscarOcorrenciasArquivadas(){
+        parametros_ocorrencia = "&occ_a=true";
+        new BuscaOcorrencias().execute();
+    }
+
+    public void buscarOcorrenciasAbertas() {
+        parametros_ocorrencia = "";
         new BuscaOcorrencias().execute();
     }
 
@@ -73,7 +90,7 @@ public class FragListaOcorrencias extends Fragment {
         protected String doInBackground(Void... voids) {
             String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=14");
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=14"+parametros_ocorrencia);
             } catch (Exception e) {
                 Toast.makeText(getContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }

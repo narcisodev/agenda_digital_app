@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import org.json.JSONObject;
 
 public class DescOcorrencia extends AppCompatActivity {
     boolean ver_menu = false; //valida o menu de arquivar ou editar a ocorrencia
+    boolean ver_menu_reabrir = false; //valida para apresentar o menuitem reabrir caso a ocorrencia esteja
     ListViewAdapterAlunosOcorrenciaDesc lvao;
     TextView desc_oc, data_oc, ped_oc, desc_arquivada;
     ListView lista_alunos;
@@ -45,7 +47,7 @@ public class DescOcorrencia extends AppCompatActivity {
         setContentView(R.layout.ped_activity_desc_ocorrencia);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
-        getSupportActionBar().setTitle("Descrição da Ocorrência");
+        getSupportActionBar().setTitle(R.string.desc_occ);
         desc_oc = findViewById(R.id.descricao_oc);
         data_oc = findViewById(R.id.data_oc);
         ped_oc = findViewById(R.id.ped_reg);
@@ -60,6 +62,14 @@ public class DescOcorrencia extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         if (ver_menu) {
             getMenuInflater().inflate(R.menu.pedagogico_menu_descricao_ocorrencia, menu);
+            if(ver_menu_reabrir){
+                MenuItem menuItem = menu.findItem(R.id.ped_menu_action_edit_occ);
+                menuItem.setVisible(false);
+                menuItem = menu.findItem(R.id.ped_menu_action_arquivar_occ);
+                menuItem.setVisible(false);
+                menuItem = menu.findItem(R.id.ped_menu_action_reabrir_occ);
+                menuItem.setVisible(true);
+            }
         }
         return true;
     }
@@ -80,6 +90,13 @@ public class DescOcorrencia extends AppCompatActivity {
             alertConfirmaArquivar();
             return true;
         }
+        
+        if(id == R.id.ped_menu_action_reabrir_occ){
+            alertConfirmaReabrir();
+            return true;
+        }
+
+
 
         onBackPressed();
         return true;
@@ -124,6 +141,7 @@ public class DescOcorrencia extends AppCompatActivity {
             return ab;
         }
 
+        @SuppressLint("WrongConstant")
         @Override
         protected void onPostExecute(String strings) {
 
@@ -138,8 +156,9 @@ public class DescOcorrencia extends AppCompatActivity {
                     JSONArray ocorrencias = objeto.getJSONArray("dados");
 
                     for (int i = 0; i < ocorrencias.length(); i++) {
-                        Log.e("NARCISO02", responsebody);
+                        //Log.e("NARCISO02", responsebody);
                         JSONObject oc_json = ocorrencias.getJSONObject(i);
+                        ocorrencia.setStatus(oc_json.getInt("id_status"));
                         ocorrencia.setId_pedagogo(oc_json.getInt("id_pedagogo"));
                         ocorrencia.setId(oc_json.getInt("id_ocorrencia"));
                         ocorrencia.setDescricao(oc_json.getString("descricao"));
@@ -163,6 +182,13 @@ public class DescOcorrencia extends AppCompatActivity {
                         data_oc.setText(ocorrencia.getData());
                         desc_oc.setText(ocorrencia.getDescricao());
                         ped_oc.setText(ocorrencia.getPedagogico_nome());
+
+                        if(ocorrencia.getStatus() == 2){
+                            desc_arquivada.setVisibility(1);
+                            ver_menu_reabrir = true;
+                            invalidateOptionsMenu();
+                        }
+
                         verificaMenu(ocorrencia.getId_pedagogo());
                     }
 
@@ -217,6 +243,35 @@ public class DescOcorrencia extends AppCompatActivity {
         alerta.show();
     }
 
+    private void alertConfirmaReabrir() {
+        AlertDialog alerta;
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle(R.string.atencao);
+        //define a mensagem
+        builder.setMessage(R.string.confirma_reabrir);
+        //define um botão como positivo
+        builder.setPositiveButton(R.string.sim, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                new ReabrirOcorrencia().execute();
+
+            }
+        });
+
+        //define um botão como negativo.
+        builder.setNegativeButton(R.string.nao, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+
+            }
+        });
+
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
+
 
     private class ArquivaOcorrencia extends AsyncTask<Void, Void, String> {
         private ProgressDialog dialog;
@@ -225,7 +280,7 @@ public class DescOcorrencia extends AppCompatActivity {
         protected void onPreExecute() {
             dialog = new ProgressDialog(DescOcorrencia.this);
             dialog.setTitle(R.string.carregando);
-            dialog.setMessage(R.string.arquivando_occ + "");
+            dialog.setMessage("Arquivando Ocorrência...");
             dialog.show();
         }
 
@@ -233,7 +288,7 @@ public class DescOcorrencia extends AppCompatActivity {
         protected String doInBackground(Void... voids) {
             String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=17&id_occ="+ocorrencia_id);
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=17&reabrir=false&id_occ="+ocorrencia_id);
             } catch (Exception e) {
                 Toast.makeText(DescOcorrencia.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -251,6 +306,52 @@ public class DescOcorrencia extends AppCompatActivity {
                 String mensagem = objeto.getString("message");
                 if(is){
                     desc_arquivada.setVisibility(1);
+                    Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_LONG).show();
+
+                }
+            } catch (JSONException e) {
+                Toast.makeText(DescOcorrencia.this, "erro" + e.getMessage(), Toast.LENGTH_LONG).show();
+                e.printStackTrace();
+
+            }
+
+            dialog.hide();
+        }
+    }
+
+    private class ReabrirOcorrencia extends AsyncTask<Void, Void, String> {
+        private ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(DescOcorrencia.this);
+            dialog.setTitle(R.string.carregando);
+            dialog.setMessage("Reabrindo Ocorrência...");
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String ab = "";
+            try {
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=17&reabrir=true&id_occ="+ocorrencia_id);
+            } catch (Exception e) {
+                Toast.makeText(DescOcorrencia.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+            return ab;
+        }
+
+        @SuppressLint("WrongConstant")
+        @Override
+        protected void onPostExecute(String strings) {
+            String responsebody = strings;
+            JSONObject objeto = null;
+            try {
+                objeto = new JSONObject(responsebody);
+                boolean is = objeto.getBoolean("success");
+                String mensagem = objeto.getString("message");
+                if(is){
+                    desc_arquivada.setVisibility(View.GONE);
                     Toast.makeText(getApplicationContext(), mensagem, Toast.LENGTH_LONG).show();
 
                 }

@@ -73,4 +73,10 @@
     <string name="data_occ">DATA DA OCORRÊNCIA</string>
     <string name="alunos">ALUNOS</string>
     <string name="reg_por">REGISTRADO POR</string>
+    <string name="ocorrencia_arquivada">Ocorrência Arquivada</string>
+    <string name="desc_occ">Descrição da Ocorrência</string>
+    <string name="action_reabrir">Reabrir</string>
+    <string name="confirma_reabrir">Tem certeza que deseja reabrir esta ocorrência?</string>
+    <string name="reabrindo_occ">Reabrindo Ocorrência</string>
+    <string name="occ_abertas">Ocorrências Abertas</string>
 </resources>

@@ -24,7 +24,7 @@
             android:layout_marginBottom="8dp"
             android:background="@color/red"
             android:padding="5dp"
-            android:text="@string/descricao_arquivada"
+            android:text="@string/ocorrencia_arquivada"
             android:textColor="@color/white"
             android:textSize="16dp"
             android:textStyle="bold" />

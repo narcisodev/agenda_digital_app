@@ -22,8 +22,15 @@
         android:id="@+id/action_my_occ"
         android:title="@string/minha_occ"
         />
+
     <item
         android:id="@+id/action_occ_arq"
         android:title="@string/occ_arq"
         />
+    <item
+        android:id="@+id/action_occ_abertas"
+        android:title="@string/occ_abertas"
+        />
+
+
 </menu>

@@ -12,8 +12,17 @@ public class Ocorrencia {
     private String descricao;
     private String pedagogico_nome;
     private String nome_al;
+    private int status;
     private ArrayList<Aluno> array_alunos = new ArrayList<>();
 
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     public String getData_bd() {
         return data_bd;
