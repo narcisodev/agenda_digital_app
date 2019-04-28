@@ -1,6 +1,7 @@
 package com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Professor;
+import com.example.narcisogomes.myapplication.pedagogico.DetalhesProfessor;
+import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -71,15 +77,14 @@ public class ListViewAdapterProfessores extends BaseAdapter {
         char letra_i = nome_i.charAt(0);
         holder.letra_inical.setText(letra_i+"");
 
-
-
-
-
-
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                TextView t_id = v.findViewById(R.id.id_professor);
+                int id = Integer.parseInt(t_id.getText().toString());
+                Intent intent = new Intent(mContext, DetalhesProfessor.class);
+                Values_pedagogico.id_professor = id;
+                mContext.startActivity(intent);
             }
         });
         return convertView;

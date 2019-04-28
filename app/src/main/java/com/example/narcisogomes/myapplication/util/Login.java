@@ -5,12 +5,14 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +43,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
     //variaveis usadas para classe registerUser
     String senha_user;
     String cpf_user;
-
+    private CheckBox saver_c;
     private AlertDialog alerta;
     private EditText user;//campo de informação do usuario
     private EditText pass;//campo de informação da senha
@@ -57,11 +59,12 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
         setContentView(R.layout.util_login_activity);
         user = (EditText) findViewById(R.id.usuario);
         pass = (EditText) findViewById(R.id.senha);
+        saver_c = findViewById(R.id.saver_c);
         this.alertDialog = criaAviso("", ""); //cria aviso para uso posterior
-        user.setText("alessandra");
+        user.setText("00000000000");
         pass.setText("123");
 
-        user.addTextChangedListener(MaskEditUtil.mask((EditText) user, MaskEditUtil.FORMAT_CPF));
+        //user.addTextChangedListener(MaskEditUtil.mask((EditText) user, MaskEditUtil.FORMAT_CPF));
         p_a = findViewById(R.id.primeiro_acesso);
 
         p_a.setOnClickListener(new View.OnClickListener() {
@@ -70,6 +73,22 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
                 layoutRegisterUsuario();
             }
         });
+
+        //user.setText("00000000002");
+        //pass.setText("123");
+
+        //VERIFICA SHARED PREFERENCIES
+        SharedPreferences sharedPreferences = getSharedPreferences("user_preferences", MODE_PRIVATE);
+        if(sharedPreferences.contains("is_saver_c")){
+            String senha = sharedPreferences.getString("pass", null);
+            String login = sharedPreferences.getString("login", null);
+            if(senha != null && login != null){
+                Log.e(Values.TAG, "SENHA SALVA SHARED = "+ senha+"\n LOGIN = "+ login);
+                this.login = login;
+                this.senha = senha;
+                new buscaLogin().execute();
+            }
+        }
     }
 
     //quando usuario clicar no botão entrar
@@ -91,7 +110,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
     private AlertDialog criaAviso(String aviso, String titulo) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(aviso);
-        builder.setTitle("Atenção");
+        builder.setTitle(R.string.atencao);
         builder.setPositiveButton(getString(R.string.ok), (DialogInterface.OnClickListener) Login.this);
         return builder.create();
     }
@@ -111,24 +130,40 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
     //se o usuario for autentico inicia a Dashboard (Inicial)
     public void isLogado(int tipo_usuario) {
         //startActivity(new Intent(this, DashDiscente.class));
+        if(saver_c.isChecked()){
+            SharedPreferences.Editor editor = getSharedPreferences("user_preferences", MODE_PRIVATE).edit();
+            editor.putString("pass", senha);
+            editor.putString("login", login);
+            editor.putBoolean("is_saver_c", true);
+            editor.commit();
+        }
         Values.usuario = usuario;
         Log.e(Values.TAG, "ISLOGADP--VALOR: " + tipo_usuario);
         switch (tipo_usuario) {
             case 1:
                 //PEDAGOGICO
-                startActivity(new Intent(Login.this, TelaPedagogico.class));
+                Values.is_menu_desc_atv = false;
+                Intent intent = new Intent(Login.this, TelaPedagogico.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 break;
             case 2:
                 //PROFESSOR
-                startActivity(new Intent(Login.this, TelaProfessor.class));
+                Intent intentp = new Intent(Login.this, TelaProfessor.class);
+                intentp.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentp);
                 break;
             case 3:
                 //RESPONÁVEL
-                startActivity(new Intent(Login.this, TelaResp.class));
+                Intent intentr = new Intent(Login.this, TelaResp.class);
+                intentr.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentr);
                 break;
             case 4:
                 //ALUNO
-                startActivity(new Intent(Login.this, TelaAluno.class));
+                Intent intenta = new Intent(Login.this, TelaAluno.class);
+                intenta.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intenta);
                 break;
         }
     }
@@ -173,7 +208,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
         });
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Registrar Usuário");
+        builder.setTitle(R.string.reg_usuario);
         builder.setView(view);
         alerta = builder.create();
         alerta.show();
@@ -230,12 +265,11 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
                 boolean isLogado = objeto.getBoolean("success");
                 if (isLogado) {
                     JSONObject user = objeto.getJSONObject("dados");
-                    int tipo_usuario = user.getInt("tipoUsuario_id");
                     usuario.setId_usuario(user.getInt("id_usuario"));
                     usuario.setNome_usuario(user.getString("nome"));
-                    //usuario.setLogin(user.getString("login"));
                     usuario.setEmail(user.getString("email"));
                     usuario.setTipoUsuario_id(user.getInt("tipoUsuario_id"));
+                    usuario.setLogin(user.getString("cpf"));
 
                     if (usuario.getTipoUsuario_id() == 1) {
                         Pedagogico p = new Pedagogico();
@@ -281,7 +315,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
 
                 } else {
                     dialog.hide();
-                    alertDialog = criaAviso(getResources().getString(R.string.login_errado), getResources().getString(R.string.title_atenction));
+                    alertDialog = criaAviso(objeto.getString("message"), getResources().getString(R.string.title_atenction));
                     alertDialog.show();
                 }
 
@@ -300,6 +334,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
         protected void onPreExecute() {
             dialog = new ProgressDialog(Login.this);
             dialog.setTitle(R.string.carregando);
+            dialog.setCanceledOnTouchOutside(false);
             dialog.setMessage("Estamos carregando a sua requisição...");
             dialog.show();
         }
@@ -314,6 +349,7 @@ public class Login extends Activity implements DialogInterface.OnClickListener {
             String ab = "";
             try {
                 ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=1.1&cpf=" + cpf_user + "&senha=" + senha_user);
+                Log.e("NARCISO222", ab);
             } catch (Exception e) {
                 Toast.makeText(Login.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }

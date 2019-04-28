@@ -8,9 +8,6 @@ import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,7 +32,7 @@ public class DescAluno extends AppCompatActivity {
         nome = findViewById(R.id.nome);
         email = findViewById(R.id.email);
         matricula = findViewById(R.id.matricula);
-        curso = findViewById(R.id.curso);
+        curso = findViewById(R.id.disciplina);
         turma = findViewById(R.id.turma);
 
         atv_aula = findViewById(R.id.atv_de_aula);
@@ -46,7 +43,7 @@ public class DescAluno extends AppCompatActivity {
         atv_aula.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DescAluno.this, ListaTarefasFilho.class));
+                startActivity(new Intent(DescAluno.this, ListaDisciplinasTarefas.class));
             }
         });
 

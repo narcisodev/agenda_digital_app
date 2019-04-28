@@ -50,7 +50,16 @@
         <activity android:name=".pedagogico.ListaProfessores" />
         <activity android:name=".pedagogico.CadastroOcorrencia" />
         <activity android:name=".pedagogico.DescOcorrencia" />
-        <activity android:name=".responsavel.ListaTarefasFilho"></activity>
+        <activity android:name=".responsavel.ListaTarefasFilho" />
+        <activity android:name=".responsavel.ListaDisciplinasTarefas" />
+        <activity android:name=".pedagogico.DetalhesProfessor" />
+        <activity android:name=".pedagogico.DescricaoAtividade" />
+        <activity android:name=".pedagogico.ListaAtividadesProfessor" />
+        <activity
+            android:name=".pedagogico.DetalhesAluno"
+            android:label="@string/title_activity_detalhes_aluno"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".util.ConfigPerfil"></activity>
     </application>
 
 </manifest>

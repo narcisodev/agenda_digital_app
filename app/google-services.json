@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "644363794053",
+    "firebase_url": "https://chat-agenda-digital-def5e.firebaseio.com",
+    "project_id": "chat-agenda-digital-def5e",
+    "storage_bucket": "chat-agenda-digital-def5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:644363794053:android:41d30f8251ba529b",
+        "android_client_info": {
+          "package_name": "com.example.narcisogomes.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "644363794053-n2kn886481jug72frq1b79jm2l9m33eu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcNiieGw7agQ20XrrBR1zm3zZtQe4N99M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "644363794053-n2kn886481jug72frq1b79jm2l9m33eu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

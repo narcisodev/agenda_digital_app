@@ -18,6 +18,7 @@ public class TelaDescAtividade extends AppCompatActivity {
     TextView data_entrega;
     TextView pontos;
     TextView disciplina;
+    TextView nome_professor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class TelaDescAtividade extends AppCompatActivity {
         descricao_atividade = findViewById(R.id.descricao_atividade);
         data_criacao = findViewById(R.id.data_criacao);
         data_entrega = findViewById(R.id.data_entrega);
+        nome_professor = findViewById(R.id.nome_professor);
         disciplina = findViewById(R.id.disciplina);
         pontos = findViewById(R.id.pontos);
         pontos.setText(atv.pontos+"");
@@ -35,6 +37,7 @@ public class TelaDescAtividade extends AppCompatActivity {
         descricao_atividade.setText(atv.descricao);
         data_criacao.setText(atv.datacriacao);
         data_entrega.setText(atv.data_entrega+"");
+        nome_professor.setText(atv.nome_professor);
         disciplina.setText(atv.disiciplina);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão

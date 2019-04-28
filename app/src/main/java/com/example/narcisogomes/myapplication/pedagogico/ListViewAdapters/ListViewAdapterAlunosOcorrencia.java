@@ -6,14 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
 import com.example.narcisogomes.myapplication.pedagogico.CadastroOcorrencia;
-import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,7 +60,7 @@ public class ListViewAdapterAlunosOcorrencia extends BaseAdapter {
             convertView = inflater.inflate(R.layout.ped_lista_alunos_model, null);
             holder.nome = convertView.findViewById(R.id.nome);
             holder.turma = convertView.findViewById(R.id.turma);
-            holder.curso = convertView.findViewById(R.id.curso);
+            holder.curso = convertView.findViewById(R.id.disciplina);
             holder.id_aluno = convertView.findViewById(R.id.id_aluno);
             holder.letra_inicial = convertView.findViewById(R.id.letra_inicial);
 

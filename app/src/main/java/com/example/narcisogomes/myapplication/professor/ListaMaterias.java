@@ -125,7 +125,7 @@ public class ListaMaterias extends AppCompatActivity {
                     }
 
                     String[] de ={"nome","nome_curso", "numero_turma"};
-                    int[] para = {R.id.disciplina, R.id.curso,R.id.turma};
+                    int[] para = {R.id.disciplina, R.id.disciplina,R.id.turma};
                     SimpleAdapter adapter= new SimpleAdapter(getApplicationContext(), listarMaterias(), R.layout.professor_lista_materias_modelo,de,para);
                     //adapter.setViewBinder(new FragListaMaterias.MateriasViewBinder());
                     lista.setAdapter(adapter);

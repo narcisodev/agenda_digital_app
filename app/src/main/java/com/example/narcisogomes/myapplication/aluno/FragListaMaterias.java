@@ -80,7 +80,9 @@ public class FragListaMaterias extends Fragment {
             item.put("materia", m.nome);
             item.put("professor", m.professor);
             item.put("qtd_tarefas", m.qtd_tarefas);
-            item.put("cor", "1");
+            String nome_l = m.nome;
+            char letra_i = nome_l.charAt(0);
+            item.put("letra_inicial", letra_i+"");
             materias.add(item);
             item = new HashMap<String, Object>();
             m = new Materia();
@@ -94,17 +96,7 @@ public class FragListaMaterias extends Fragment {
         @Override
         public boolean setViewValue(View view, Object data, String textRepresentation) {
 
-            if (view.getId() == R.id.cor_materia) {
-                cor += 1;
-                if ((cor % 2) == 0) {
-                    //view.setBackgroundColor(getResources().getColor(R.color.materia1));
-                } else {
-                    //view.setBackgroundColor(getResources().getColor(R.color.materia2));
-                }
-
-                return true;
-            }
-            return false;
+          return false;
         }
     }
 
@@ -158,8 +150,8 @@ public class FragListaMaterias extends Fragment {
                     m = new Materia();
                 }
 
-                String[] de = {"materia", "professor", "cor"};
-                int[] para = {R.id.materia, R.id.professor, R.id.cor_materia};
+                String[] de = {"materia", "professor", "letra_inicial", "qtd_tarefas"};
+                int[] para = {R.id.materia, R.id.professor, R.id.letra_inicial, R.id.qtd_tarefas};
                 SimpleAdapter adapter = new SimpleAdapter(getContext(), listarMaterias(), R.layout.aluno_frag_lista_materias_modelo, de, para);
                 adapter.setViewBinder(new MateriasViewBinder());
                 listaMaterias.setAdapter(adapter);

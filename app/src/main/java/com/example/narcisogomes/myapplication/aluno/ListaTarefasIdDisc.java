@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ListaTarefasIdDisc extends AppCompatActivity {
+    int verifica_pesquisa_tarefa = 0;
     String search_url_service;
     List<Atividade> atividades_array = new ArrayList<>();
     ListViewAdapterAtividades listViewAdapterAtividades;
@@ -38,7 +39,7 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
         setContentView(R.layout.aluno_activity_lista_tarefas);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
-        getSupportActionBar().setTitle("Listagem de tarefas");
+        getSupportActionBar().setTitle(R.string.listagem_tarefas);
         listaAtividades = findViewById(R.id.lista_atividades);
         search_url_service = "acao=3&cause=all&id_disciplina=" + Values.id_disciplina_lista_materias;
         new BuscaAtividades().execute();
@@ -48,7 +49,7 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_listagem_tarefas, menu);
-        MenuItem myActionMenuItem= menu.findItem(R.id.app_bar_search);
+        MenuItem myActionMenuItem = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -58,10 +59,10 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
+                if (TextUtils.isEmpty(newText)) {
                     listViewAdapterAtividades.filter("");
                     listaAtividades.clearTextFilter();
-                }else{
+                } else {
                     listViewAdapterAtividades.filter(newText);
                 }
                 return true;
@@ -79,17 +80,22 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_listar_atuais) {
             search_url_service = "acao=3&cause=after&id_disciplina=" + Values.id_disciplina_lista_materias;
+            verifica_pesquisa_tarefa = 1;
+
             new BuscaAtividades().execute();
-        } else if (id ==R.id.action_listar_anteriores) {
+        } else if (id == R.id.action_listar_anteriores) {
             search_url_service = "acao=3&cause=before&id_disciplina=" + Values.id_disciplina_lista_materias;
+            verifica_pesquisa_tarefa = 2;
+
             new BuscaAtividades().execute();
         } else if (id == R.id.action_listar_todas) {
             search_url_service = "acao=3&cause=all&id_disciplina=" + Values.id_disciplina_lista_materias;
+            verifica_pesquisa_tarefa = 3;
+
             new BuscaAtividades().execute();
-        }else{
+        } else {
             super.onBackPressed();
         }
-
 
 
         return true;
@@ -113,9 +119,9 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
          * */
         @Override
         protected String doInBackground(Void... voids) {
-            String ab="";
+            String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,search_url_service);
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, search_url_service);
             } catch (Exception e) {
                 Toast.makeText(ListaTarefasIdDisc.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -132,37 +138,40 @@ public class ListaTarefasIdDisc extends AppCompatActivity {
             try {
                 objeto = new JSONObject(responsebody);
                 boolean is = objeto.getBoolean("success");
-                if(is){
+                if (is) {
                     JSONArray tarefas = objeto.getJSONArray("dados");
-
-                    for(int i = 0; i< tarefas.length(); i++){
+                    for (int i = 0; i < tarefas.length(); i++) {
                         JSONObject tarefa_json = tarefas.getJSONObject(i);
                         atividade.id_atividade = tarefa_json.getInt("id_atividade");
                         atividade.titulo = tarefa_json.getString("titulo");
                         atividade.descricao = tarefa_json.getString("descricao");
                         atividade.pontos = tarefa_json.getString("pontos");
-                        atividade.data = tarefa_json.getString("data")+ " ";
+                        atividade.data = tarefa_json.getString("data") + " ";
                         atividade.data_entrega = tarefa_json.getString("dataentrega");
                         atividade.disiciplina = tarefa_json.getString("disciplina");
                         atividade.data = tarefa_json.getString("data");
                         atividade.datacriacao = tarefa_json.getString("datacriacao");
+                        atividade.nome_professor = tarefa_json.getString("professor");
                         atividades_array.add(atividade);
                         atividade = new Atividade();
                     }
-
                     listViewAdapterAtividades = new ListViewAdapterAtividades(ListaTarefasIdDisc.this, atividades_array);
-
-
                     listaAtividades.setAdapter(listViewAdapterAtividades);
+                    if(verifica_pesquisa_tarefa==1){
+                        getSupportActionBar().setTitle(R.string.tarefas_atuais);
+                    }else if(verifica_pesquisa_tarefa == 2){
+                        getSupportActionBar().setTitle(R.string.tarefas_anteriores);
+                    }else if(verifica_pesquisa_tarefa == 3){
+                        getSupportActionBar().setTitle(R.string.todas_tarefas);
+                    }
+                } else {
+                    Toast.makeText(ListaTarefasIdDisc.this, objeto.getString("message"), Toast.LENGTH_LONG).show();
 
-                }else{
-                    Toast.makeText(ListaTarefasIdDisc.this, "Não existem tarefas cadastradas para esta matéria", Toast.LENGTH_LONG);
                 }
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
             dialog.hide();
         }
     }

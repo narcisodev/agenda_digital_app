@@ -85,7 +85,7 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/curso"
+                        android:id="@+id/disciplina"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Curso: Técnico em Manutenção e Suporte em Informática"

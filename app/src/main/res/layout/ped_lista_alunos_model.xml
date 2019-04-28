@@ -37,7 +37,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="V"
-                        android:textSize="30dp"
+                        android:textSize="20dp"
                         android:textColor="#fff" />
 
                 </LinearLayout>
@@ -65,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:text="Narciso Almeida Gomes"
                     android:textStyle="bold"
+                    android:textColor="@color/primary_text"
                     />
 
                 <TextView
@@ -74,13 +75,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="2018.1"
+                    android:textColor="@color/primary_text"
                     android:gravity="end" />
 
             </LinearLayout>
 
 
             <TextView
-                android:id="@+id/curso"
+                android:id="@+id/disciplina"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Técnico em Manutenção e Suporte em Informática" />

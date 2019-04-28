@@ -2,6 +2,7 @@ package com.example.narcisogomes.myapplication.professor.ListAdapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.renderscript.Sampler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.example.narcisogomes.myapplication.aluno.Values_aluno;
 import com.example.narcisogomes.myapplication.models.Atividade;
 import com.example.narcisogomes.myapplication.professor.TelaDescAtv;
 import com.example.narcisogomes.myapplication.professor.Values_professor;
+import com.example.narcisogomes.myapplication.util.Values;
 
 import java.util.ArrayList;
 import java.util.List;

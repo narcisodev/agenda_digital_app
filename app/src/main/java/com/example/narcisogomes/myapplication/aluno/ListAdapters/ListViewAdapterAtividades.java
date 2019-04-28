@@ -87,6 +87,7 @@ public class ListViewAdapterAtividades extends BaseAdapter {
                     if(id_atividade == a.id_atividade){
                         Values_aluno.atividade_desc = a;
                         mContext.startActivity(new Intent(mContext, TelaDescAtividade.class));
+                        break;
                     }
                 }
             }

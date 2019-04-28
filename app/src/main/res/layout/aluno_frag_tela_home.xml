@@ -204,7 +204,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/curso"
+                            android:id="@+id/disciplina"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 
@@ -557,7 +557,7 @@
                                 <TextView
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:text="Mas não se preocupe, assim que seus professores cadastrarem nos mostraremos para você." />
+                                    android:text="@string/mensagem_sem_tarefa" />
 
 
                             </LinearLayout>

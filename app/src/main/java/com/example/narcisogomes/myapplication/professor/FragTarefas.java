@@ -123,6 +123,8 @@ public class FragTarefas extends Fragment {
                         atv.hora = atividade.getString("hora");
                         atv.data_entrega = atividade.getString("dataentrega");
                         atv.disiciplina = atividade.getString("disciplina");
+                        atv.curso = atividade.getString("curso");
+                        atv.turma = atividade.getString("turma");
                         lista_atividades.add(atv);
                         atv = new Atividade();
                     }

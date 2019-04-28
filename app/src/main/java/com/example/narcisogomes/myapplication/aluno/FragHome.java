@@ -1,28 +1,21 @@
 package com.example.narcisogomes.myapplication.aluno;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Atividade;
-import com.example.narcisogomes.myapplication.models.Materia;
-import com.example.narcisogomes.myapplication.professor.TelaDescAtv;
-import com.example.narcisogomes.myapplication.professor.Values_professor;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
 
@@ -53,7 +46,7 @@ public class FragHome extends Fragment {
         txt_login = view.findViewById(R.id.login);
         txt_responsavel = view.findViewById(R.id.responsavel);
         txt_matricula = view.findViewById(R.id.matricula);
-        txt_curso = view.findViewById(R.id.curso);
+        txt_curso = view.findViewById(R.id.disciplina);
         txt_turma = view.findViewById(R.id.turma);
         atividade_1 = view.findViewById(R.id.atividade_1);
         atividade_2 = view.findViewById(R.id.atividade_2);
@@ -213,8 +206,9 @@ public class FragHome extends Fragment {
         @Override
         protected void onPreExecute() {
             dialog = new ProgressDialog(getContext());
+            dialog.setCanceledOnTouchOutside(false);
             dialog.setTitle(R.string.carregando);
-            dialog.setMessage("Estamos carregando a sua requisição...");
+            dialog.setMessage(getResources().getString( R.string.carregando_requisicao));
             dialog.show();
         }
 
@@ -229,7 +223,7 @@ public class FragHome extends Fragment {
                 ab = RequisicaoPost.sendPost(Values.URL_SERVICE, "acao=3.1" +
                         "&limit=true&id_turma=" + Values_aluno.id_turma);
             } catch (Exception e) {
-                Toast.makeText(getContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Mensagem 01: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
             return ab;
         }
@@ -252,16 +246,18 @@ public class FragHome extends Fragment {
                         a.data_entrega = disc_json.getString("dataentrega");
                         a.disiciplina = disc_json.getString("disciplina");
                         a.datacriacao = disc_json.getString("datacriacao");
+                        a.nome_professor = disc_json.getString("professor");
                         lista_atv_urgentes.add(a);
                         a = new Atividade();
                     }
-
                     tratarExibicaoTarefas();
-
+                }else{
+                    lista_atv_urgentes.clear();
+                    tratarExibicaoTarefas();
                 }
             } catch (JSONException e) {
                 dialog.hide();
-                Toast.makeText(getContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Mensagem 02: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
             dialog.hide();
         }

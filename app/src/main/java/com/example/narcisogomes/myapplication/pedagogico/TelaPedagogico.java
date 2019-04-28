@@ -85,6 +85,8 @@ public class TelaPedagogico extends AppCompatActivity {
             myActionMenuItem.setVisible(false);
             MenuItem myActionMenuItem2 = menu.findItem(R.id.action_occ_arq);
             myActionMenuItem2.setVisible(false);
+            MenuItem myActionMenuItem3 = menu.findItem(R.id.action_occ_abertas);
+            myActionMenuItem3.setVisible(false);
         }
 
         if (Values_pedagogico.frag_a == "OCR") {

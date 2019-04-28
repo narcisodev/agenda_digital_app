@@ -92,6 +92,7 @@ public class FragTelaInicial extends Fragment {
 
             dialog = new ProgressDialog(getContext());
             dialog.setTitle(R.string.carregando);
+            dialog.setCanceledOnTouchOutside(false);
             dialog.setMessage("Estamos carregando a sua requisição...");
             dialog.show();
 

@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/nav_header_desc"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:src="@drawable/ic_account_circle_white_24dp"/>
+        app:srcCompat="@drawable/ic_account_circle_white_24dp"/>
 
     <TextView
         android:id="@+id/usuario_header_inicial"

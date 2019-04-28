@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,12 +20,13 @@
                 android:padding="12dp">
 
                 <EditText
+                    android:inputType="number|numberDecimal"
                     android:id="@+id/login"
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:drawableLeft="@drawable/ic_person_24dp"
                     android:drawablePadding="10dp"
-                    android:hint="Seu Login"
+                    android:hint="@string/seu_cpf"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorText" />
 
@@ -37,7 +36,7 @@
                     android:layout_height="50dp"
                     android:drawableLeft="@drawable/ic_lock_24dp"
                     android:drawablePadding="10dp"
-                    android:hint="Sua senha"
+                    android:hint="@string/sua_senha"
                     android:inputType="textPassword"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorText"
@@ -50,7 +49,7 @@
                     android:layout_height="50dp"
                     android:drawableLeft="@drawable/ic_lock_24dp"
                     android:drawablePadding="10dp"
-                    android:hint="Confirmação da senha"
+                    android:hint="@string/conf_senha"
                     android:inputType="textPassword"
                     android:textColor="@color/colorText"
                     android:textColorHint="@color/colorText"
@@ -65,7 +64,6 @@
                     android:drawableLeft="@drawable/ic_input_black_24dp"
                     android:drawablePadding="5dp"
                     android:foreground="?android:attr/selectableItemBackground"
-                    android:onClick="logar"
                     android:text="@string/register"
                     android:textColor="#fff" />
 

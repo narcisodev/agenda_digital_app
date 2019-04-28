@@ -2,6 +2,7 @@
 <resources>
     <color name="colorPrimary">#00bfa5</color>
     <color name="colorPrimaryDark">#00a791</color>
+    <color name="colorPrimaryDark2">#00c691</color>
 <!--
     <color name="colorPrimary">#20accf</color>
     <color name="colorPrimaryDark">#35bddf</color>
@@ -21,7 +22,7 @@
 
     <color name="background_grey">#fff</color>
     <color name="primary_text">#000</color>
-    <color name="secondary_text">#000</color>
+    <color name="secondary_text">#0b0b0b</color>
     <color name="secondary_color">#0989</color>
     <color name="cor_data">#07c64c</color>
     <color name="materia1">#f501fd94</color>

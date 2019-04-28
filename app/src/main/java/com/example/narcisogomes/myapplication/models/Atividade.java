@@ -12,4 +12,7 @@ public class Atividade {
     public int id_materia;
     public String disiciplina;
     public String datacriacao;
+    public String nome_professor;
+    public String turma;
+    public String curso;
 }

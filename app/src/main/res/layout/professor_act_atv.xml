@@ -29,7 +29,7 @@
                 android:orientation="vertical">
                 <TextView
                     android:textStyle="bold"
-                    android:padding="5dp"
+                    android:padding="3dp"
                     android:background="@color/green"
                     android:textColor="@color/white"
                     android:id="@+id/titulo_atividade"
@@ -45,11 +45,124 @@
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
                     android:textStyle="normal"
-                    android:layout_marginLeft="9dp"
+
                     android:textColor="@color/primary_text"
                     android:text=""
                     />
 
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="10dp">
+
+        <LinearLayout
+            android:padding="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:textStyle="bold"
+                    android:padding="3dp"
+
+                    android:background="@color/green"
+                    android:textColor="@color/white"
+                    android:id="@+id/asdfasd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16dp"
+
+                    android:text="Curso"/>
+
+                <TextView
+                    android:id="@+id/disciplina"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"
+                    android:textStyle="normal"
+
+                    android:textColor="@color/primary_text"
+                    android:text=""
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:weightSum="2">
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <TextView
+                        android:paddingStart="5dp"
+                        android:textStyle="bold"
+                        android:padding="2dp"
+                        android:background="@color/green"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Disciplina"
+                        android:textSize="16dp"
+                        android:paddingLeft="5dp" />
+
+
+                    <TextView
+                        android:id="@+id/disciplina"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textStyle="normal"
+
+                        android:textColor="@color/primary_text"
+                        android:text=""/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:padding="10dp"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:paddingStart="5dp"
+                        android:textStyle="bold"
+                        android:padding="2dp"
+                        android:background="@color/green"
+                        android:textColor="@color/white"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Turma"
+                        android:textSize="16dp"
+                        android:layout_marginLeft="9dp"
+                        android:paddingLeft="5dp" />
+
+                    <TextView
+                        android:id="@+id/turma"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="15dp"
+                        android:textStyle="normal"
+                        android:layout_marginLeft="9dp"
+                        android:textColor="@color/primary_text"
+                        android:text=""/>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
@@ -74,7 +187,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_event_note_24dp"
+                    app:srcCompat="@drawable/ic_nota"
                     android:paddingLeft="10dp"/>
                 <TextView
                     android:textColor="@color/primary_text"

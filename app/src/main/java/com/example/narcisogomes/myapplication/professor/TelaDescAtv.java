@@ -21,7 +21,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TelaDescAtv extends AppCompatActivity {
-    TextView txt_titulo, txt_descricao, txt_pontos, txt_data_criacao, txt_data_entrega;
+    TextView txt_titulo, txt_descricao, txt_pontos, txt_data_criacao, txt_data_entrega,curso, disciplina,turma;
     Atividade a = new Atividade();
     private AlertDialog alerta;
 
@@ -38,7 +38,13 @@ public class TelaDescAtv extends AppCompatActivity {
         txt_pontos = findViewById(R.id.pontos);
         txt_data_criacao = findViewById(R.id.data_criacao);
         txt_data_entrega = findViewById(R.id.data_entrega);
+        curso = findViewById(R.id.disciplina);
+        disciplina = findViewById(R.id.disciplina);
+        turma = findViewById(R.id.turma);
         a = Values_professor.atividade_obj;
+        turma.setText(a.turma);
+        disciplina.setText(a.disiciplina);
+        curso.setText(a.curso);
         txt_titulo.setText(a.titulo);
         txt_descricao.setText(a.descricao);
         txt_pontos.setText(a.pontos);
@@ -83,7 +89,10 @@ public class TelaDescAtv extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.prof_menu_desctarefa, menu);
+        if(Values.is_menu_desc_atv){
+            getMenuInflater().inflate(R.menu.prof_menu_desctarefa, menu);
+        }
+
         return true;
     }
 

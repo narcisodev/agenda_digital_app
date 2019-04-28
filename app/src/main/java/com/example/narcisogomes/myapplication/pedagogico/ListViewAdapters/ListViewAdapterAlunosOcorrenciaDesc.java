@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Aluno;
-import com.example.narcisogomes.myapplication.pedagogico.CadastroOcorrencia;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,7 +57,7 @@ public class ListViewAdapterAlunosOcorrenciaDesc extends BaseAdapter {
             convertView = inflater.inflate(R.layout.ped_lista_alunos_model, null);
             holder.nome = convertView.findViewById(R.id.nome);
             holder.turma = convertView.findViewById(R.id.turma);
-            holder.curso = convertView.findViewById(R.id.curso);
+            holder.curso = convertView.findViewById(R.id.disciplina);
             holder.id_aluno = convertView.findViewById(R.id.id_aluno);
             holder.letra_inicial = convertView.findViewById(R.id.letra_inicial);
 

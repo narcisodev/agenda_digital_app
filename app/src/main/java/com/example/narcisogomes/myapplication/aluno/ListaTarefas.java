@@ -46,7 +46,14 @@ public class ListaTarefas extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_listagem_tarefas, menu);
-        MenuItem myActionMenuItem= menu.findItem(R.id.app_bar_search);
+        //ocultar os menus Atuais, Anteriores e Todas porque ele está sendo usado em ListaTarefasIdDisc
+        MenuItem m = menu.findItem(R.id.action_listar_atuais);
+        m.setVisible(false);
+        m = menu.findItem(R.id.action_listar_anteriores);
+        m.setVisible(false);
+         m = menu.findItem(R.id.action_listar_todas);
+        m.setVisible(false);
+        MenuItem myActionMenuItem = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) myActionMenuItem.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -56,10 +63,10 @@ public class ListaTarefas extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if(TextUtils.isEmpty(newText)){
+                if (TextUtils.isEmpty(newText)) {
                     listViewAdapterAtividades.filter("");
                     listaAtividades.clearTextFilter();
-                }else{
+                } else {
                     listViewAdapterAtividades.filter(newText);
                 }
                 return true;
@@ -78,16 +85,15 @@ public class ListaTarefas extends AppCompatActivity {
         if (id == R.id.action_listar_atuais) {
             search_url_service = "acao=3.1&cause=after&id_turma=" + Values_aluno.id_turma;
             new BuscaAtividades().execute();
-        } else if (id ==R.id.action_listar_anteriores) {
+        } else if (id == R.id.action_listar_anteriores) {
             search_url_service = "acao=3.1&cause=before&id_turma=" + Values_aluno.id_turma;
             new BuscaAtividades().execute();
         } else if (id == R.id.action_listar_todas) {
             search_url_service = "acao=3.1&cause=all&id_turma=" + Values_aluno.id_turma;
             new BuscaAtividades().execute();
-        }else{
+        } else {
             super.onBackPressed();
         }
-
 
 
         return true;
@@ -111,9 +117,9 @@ public class ListaTarefas extends AppCompatActivity {
          * */
         @Override
         protected String doInBackground(Void... voids) {
-            String ab="";
+            String ab = "";
             try {
-                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,search_url_service);
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE, search_url_service);
             } catch (Exception e) {
                 Toast.makeText(ListaTarefas.this, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
@@ -130,20 +136,21 @@ public class ListaTarefas extends AppCompatActivity {
             try {
                 objeto = new JSONObject(responsebody);
                 boolean is = objeto.getBoolean("success");
-                if(is){
+                if (is) {
                     JSONArray tarefas = objeto.getJSONArray("dados");
 
-                    for(int i = 0; i< tarefas.length(); i++){
+                    for (int i = 0; i < tarefas.length(); i++) {
                         JSONObject tarefa_json = tarefas.getJSONObject(i);
                         atividade.id_atividade = tarefa_json.getInt("id_atividade");
                         atividade.titulo = tarefa_json.getString("titulo");
                         atividade.descricao = tarefa_json.getString("descricao");
                         atividade.pontos = tarefa_json.getString("pontos");
-                        atividade.data = tarefa_json.getString("data")+ " ";
+                        atividade.data = tarefa_json.getString("data") + " ";
                         atividade.data_entrega = tarefa_json.getString("dataentrega");
                         atividade.disiciplina = tarefa_json.getString("disciplina");
                         atividade.data = tarefa_json.getString("data");
                         atividade.datacriacao = tarefa_json.getString("datacriacao");
+                        atividade.nome_professor = tarefa_json.getString("professor");
                         atividades_array.add(atividade);
                         atividade = new Atividade();
                     }
@@ -153,7 +160,7 @@ public class ListaTarefas extends AppCompatActivity {
 
                     listaAtividades.setAdapter(listViewAdapterAtividades);
 
-                }else{
+                } else {
                     Toast.makeText(ListaTarefas.this, "Não existem tarefas cadastradas para esta matéria", Toast.LENGTH_LONG);
                 }
 
