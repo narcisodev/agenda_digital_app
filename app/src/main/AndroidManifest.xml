@@ -59,7 +59,8 @@
             android:name=".pedagogico.DetalhesAluno"
             android:label="@string/title_activity_detalhes_aluno"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".util.ConfigPerfil"></activity>
+        <activity android:name=".util.ConfigPerfil" />
+        <activity android:name=".pedagogico.ListaOcorrencias"></activity>
     </application>
 
 </manifest>

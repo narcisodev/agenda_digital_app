@@ -7,32 +7,30 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Atividade;
 import com.example.narcisogomes.myapplication.models.DetalhesAlunos;
-import com.example.narcisogomes.myapplication.models.Materia;
 import com.example.narcisogomes.myapplication.models.Ocorrencia;
 import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterAtividadesAlunos;
 import com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters.ListViewAdapterOcorrenciasAlunos;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DetalhesAluno extends AppCompatActivity {
+    boolean refresh = false;
     ProgressDialog dialog;
     DetalhesAlunos das = new DetalhesAlunos();
     TextView n_a, email, n_r, matricula, curso, turma, t_occ, t_t;
     ListView lista_occ, lista_tarefas;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,7 @@ public class DetalhesAluno extends AppCompatActivity {
         curso = findViewById(R.id.curso);
         turma = findViewById(R.id.turma);
         t_occ = findViewById(R.id.ocorrencias);
-         t_t = findViewById(R.id.tarefas_qtd);
+        t_t = findViewById(R.id.tarefas_qtd);
         lista_occ = findViewById(R.id.lista_occ);
         lista_tarefas = findViewById(R.id.lista_tarefas);
 
@@ -56,12 +54,12 @@ public class DetalhesAluno extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                refresh = true;
+                new BuscarDetalhesAluno().execute();
             }
         });
 
@@ -119,6 +117,7 @@ public class DetalhesAluno extends AppCompatActivity {
                     das.setT_tar(d_a.getInt("qtd_tarefas"));
 
                     JSONArray ocorrencias = d_a.getJSONArray("ocorrencias");
+                    das.getLista_occ().clear();
                     for (int i = 0; i < ocorrencias.length(); i++) {
                         Ocorrencia oc = new Ocorrencia();
                         JSONObject oc_j = ocorrencias.getJSONObject(i);
@@ -129,14 +128,15 @@ public class DetalhesAluno extends AppCompatActivity {
                     }
 
                     JSONArray tarefas = d_a.getJSONArray("tarefas");
+                    das.getLista_atv().clear();
                     for (int i = 0; i < tarefas.length(); i++) {
-                       Atividade atv = new Atividade();
-                       JSONObject jat = tarefas.getJSONObject(i);
-                       atv.id_atividade = jat.getInt("id_atv");
-                       atv.descricao = jat.getString("descricao");
-                       atv.data_entrega=jat.getString("dataentrega");
-                       atv.disiciplina = jat.getString("disciplina");
-                       das.getLista_atv().add(atv);
+                        Atividade atv = new Atividade();
+                        JSONObject jat = tarefas.getJSONObject(i);
+                        atv.id_atividade = jat.getInt("id_atv");
+                        atv.descricao = jat.getString("descricao");
+                        atv.data_entrega = jat.getString("dataentrega");
+                        atv.disiciplina = jat.getString("disciplina");
+                        das.getLista_atv().add(atv);
                     }
                     dialog.hide();
                     trataExibicao();
@@ -158,16 +158,12 @@ public class DetalhesAluno extends AppCompatActivity {
         matricula.setText(das.getMatricula());
         curso.setText(das.getCurso());
         turma.setText(das.getTurma());
-        if(das.getT_occ() == 0){
+        if (das.getT_occ() == 0) {
             t_occ.setText(getResources().getString(R.string.sem_occ_reg));
-        }else
-
-        if(das.getT_occ() == 1){
+        } else if (das.getT_occ() == 1) {
             t_occ.setText(getResources().getString(R.string.um_occ_reg));
-        }else
-
-        if(das.getT_occ() > 1){
-            t_occ.setText(das.getT_occ()+ " "+ getResources().getString(R.string.occs_cad));
+        } else if (das.getT_occ() > 1) {
+            t_occ.setText(das.getT_occ() + " " + getResources().getString(R.string.occs_cad));
         }
         ListViewAdapterOcorrenciasAlunos adapter = new ListViewAdapterOcorrenciasAlunos(DetalhesAluno.this, das.getLista_occ());
         lista_occ.setAdapter(adapter);
@@ -175,16 +171,18 @@ public class DetalhesAluno extends AppCompatActivity {
         ListViewAdapterAtividadesAlunos lvaa = new ListViewAdapterAtividadesAlunos(DetalhesAluno.this, das.getLista_atv());
         lista_tarefas.setAdapter(lvaa);
 
-        if(das.getT_tar() == 0){
+        if (das.getT_tar() == 0) {
             t_t.setText(getResources().getString(R.string.sem_tar_reg));
-        }else
-
-        if(das.getT_tar() == 1){
+        } else if (das.getT_tar() == 1) {
             t_t.setText(getResources().getString(R.string.um_tar_reg));
-        }else
+        } else if (das.getT_occ() > 1) {
+            t_t.setText(das.getT_tar() + " " + getResources().getString(R.string.tars_cad));
+        }
 
-        if(das.getT_occ() > 1){
-            t_t.setText(das.getT_tar()+ " "+ getResources().getString(R.string.tars_cad));
+
+        if (refresh) {
+            Snackbar.make(fab, "Atualizado com sucesso", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show();
         }
 
     }

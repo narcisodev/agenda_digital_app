@@ -38,8 +38,8 @@ public class TelaDescAtv extends AppCompatActivity {
         txt_pontos = findViewById(R.id.pontos);
         txt_data_criacao = findViewById(R.id.data_criacao);
         txt_data_entrega = findViewById(R.id.data_entrega);
-        curso = findViewById(R.id.disciplina);
-        disciplina = findViewById(R.id.disciplina);
+        curso = findViewById(R.id.curso);
+        disciplina = findViewById(R.id.descricao);
         turma = findViewById(R.id.turma);
         a = Values_professor.atividade_obj;
         turma.setText(a.turma);
@@ -48,7 +48,7 @@ public class TelaDescAtv extends AppCompatActivity {
         txt_titulo.setText(a.titulo);
         txt_descricao.setText(a.descricao);
         txt_pontos.setText(a.pontos);
-        txt_data_criacao.setText(a.data + " às " + a.hora);
+        txt_data_criacao.setText(a.datacriacao);
         txt_data_entrega.setText(a.data_entrega);
     }
 

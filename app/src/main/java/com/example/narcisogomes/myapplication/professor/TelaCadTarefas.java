@@ -203,7 +203,15 @@ public class TelaCadTarefas extends AppCompatActivity implements DialogInterface
         new CadastrarAtividade().execute();
         */
 
-        new CadastrarAtividade().execute();
+        if(Values.atividade_obj.titulo == null || Values.atividade_obj.titulo.isEmpty()){
+            Toast.makeText(TelaCadTarefas.this, "Informe o título", Toast.LENGTH_LONG).show();
+        }else if (Values.atividade_obj.descricao == null || Values.atividade_obj.descricao.isEmpty()){
+            Toast.makeText(TelaCadTarefas.this, "Informe a descrição", Toast.LENGTH_LONG).show();
+        }else{
+            new CadastrarAtividade().execute();
+        }
+
+
 
         //String a = (String) disciplinas.getSelectedItem();
         //chamar a classe CadastrarAtividade

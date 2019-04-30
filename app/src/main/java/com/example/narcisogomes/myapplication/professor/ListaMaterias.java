@@ -1,46 +1,48 @@
 package com.example.narcisogomes.myapplication.professor;
-
+import com.example.narcisogomes.myapplication.R;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Materia;
 import com.example.narcisogomes.myapplication.util.RequisicaoPost;
 import com.example.narcisogomes.myapplication.util.Values;
-
+import com.xwray.groupie.GroupAdapter;
+import com.xwray.groupie.Item;
+import com.xwray.groupie.OnItemClickListener;
+import com.xwray.groupie.ViewHolder;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ListaMaterias extends AppCompatActivity {
+    GroupAdapter adapter = new GroupAdapter();
     Materia m_geral = new Materia();
-    ArrayList<Materia> materias = new ArrayList<>();
-    ListView lista;
+    RecyclerView lista;
     private List<Map<String, Object>> materias_m = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.professor_lista_materias_);
         lista = findViewById(R.id.lista_materias_prof);
-        new CarregaDisciplinas().execute();
-
+        lista.setLayoutManager(new LinearLayoutManager(this));
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Suas Disciplinas");
 
+        /*
         lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -51,23 +53,35 @@ public class ListaMaterias extends AppCompatActivity {
                 ListaMaterias.super.onBackPressed();
             }
         });
+        */
+        new CarregaDisciplinas().execute();
     }
 
-    private List<Map<String,Object>> listarMaterias(){
-        materias_m = new ArrayList<Map<String, Object>>();
-        Map<String, Object> item = new HashMap<String, Object>();
-        Materia m = new Materia();
-        for(int i  = 0; i < materias.size(); i++ ){
-            m = materias.get(i);
-            item.put("id", m.id);
-            item.put("nome", m.nome);
-            item.put("nome_curso", m.nome_curso);
-            item.put("numero_turma", m.numero_turma);
-            materias_m.add(item);
-            item = new HashMap<String, Object>();
-            m = new Materia();
+
+    private class DisciplinaItem extends Item<ViewHolder> {
+        private final Materia materia;
+
+        private DisciplinaItem(Materia materia) {
+            this.materia = materia;
         }
-        return materias_m;
+
+        @Override
+        public void bind(@NonNull ViewHolder viewHolder, int position) {
+            Log.e("NARCISO222", "entrou no bind");
+            TextView disciplina = viewHolder.itemView.findViewById(R.id.descricao);
+            TextView curso = viewHolder.itemView.findViewById(R.id.curso);
+            TextView turma = viewHolder.itemView.findViewById(R.id.turma);
+
+            disciplina.setText(materia.nome);
+            curso.setText(materia.nome_curso);
+            turma.setText(materia.numero_turma);
+
+        }
+
+        @Override
+        public int getLayout() {
+            return R.layout.professor_lista_materias_modelo;
+        }
     }
 
 
@@ -106,6 +120,7 @@ public class ListaMaterias extends AppCompatActivity {
             return ab;
         }
 
+
         @Override
         protected void onPostExecute(String strings) {
             JSONObject objeto = null;
@@ -120,21 +135,28 @@ public class ListaMaterias extends AppCompatActivity {
                         m_geral.nome = disc_json.getString("nome");
                         m_geral.nome_curso = disc_json.getString("nome_curso");
                         m_geral.numero_turma = disc_json.getString("numero_turma");
-                        materias.add(m_geral);
+                        adapter.add(new DisciplinaItem(m_geral));
                         m_geral = new Materia();
                     }
 
-                    String[] de ={"nome","nome_curso", "numero_turma"};
-                    int[] para = {R.id.disciplina, R.id.disciplina,R.id.turma};
-                    SimpleAdapter adapter= new SimpleAdapter(getApplicationContext(), listarMaterias(), R.layout.professor_lista_materias_modelo,de,para);
-                    //adapter.setViewBinder(new FragListaMaterias.MateriasViewBinder());
+                    adapter.setOnItemClickListener(new OnItemClickListener() {
+                        @Override
+                        public void onItemClick(@NonNull Item item, @NonNull View view) {
+                            DisciplinaItem ditem = (DisciplinaItem) item;
+                            int id = ditem.materia.id;
+                            Toast.makeText(ListaMaterias.this, "MATERIA " + ditem.materia.nome + " ID " + id, Toast.LENGTH_LONG).show();
+
+                        }
+                    });
                     lista.setAdapter(adapter);
+                    dialog.hide();
                 }
             } catch (JSONException e) {
                 dialog.hide();
                 Toast.makeText(getApplicationContext(), "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
             }
-            dialog.hide();
+
         }
+
     }
 }

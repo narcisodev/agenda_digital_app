@@ -1,45 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal"
-    >
+    android:layout_height="wrap_content"
+    android:visibility="visible"
+    android:paddingBottom="4dp">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginLeft="10dp"
-        android:orientation="vertical">
-        <TextView
-            android:id="@+id/disciplina"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Rede de Computadores II"
-            android:textColor="@color/colorText"
-            android:textStyle="normal|bold"
-            android:textSize="18dp"/>
+        android:id="@+id/linearLayout5"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/circlebackgroundgreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_marginTop="1dp"
-            android:id="@+id/disciplina"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Técnico em Manutenção e Suporte em Informática"
-            android:textSize="15dp"/>
+            android:layout_gravity="center"
+            android:gravity="center">
 
-        <TextView
-            android:layout_marginTop="1dp"
-            android:id="@+id/turma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2011.1"
-            android:textSize="15dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_disciplina" />
+
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/descricao"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="Manutenção de Computadores"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
+    <TextView
+        android:id="@+id/curso"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Técnico em Manutenção e Suporte em Informática"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintEnd_toEndOf="@+id/descricao"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/descricao" />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/turma"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="2017.1"
+        app:layout_constraintEnd_toEndOf="@+id/curso"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout5"
+        app:layout_constraintTop_toBottomOf="@+id/curso" />
+
+</android.support.constraint.ConstraintLayout>

@@ -87,7 +87,7 @@
                     android:text="Curso"/>
 
                 <TextView
-                    android:id="@+id/disciplina"
+                    android:id="@+id/curso"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="15dp"
@@ -123,7 +123,7 @@
 
 
                     <TextView
-                        android:id="@+id/disciplina"
+                        android:id="@+id/descricao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="15dp"

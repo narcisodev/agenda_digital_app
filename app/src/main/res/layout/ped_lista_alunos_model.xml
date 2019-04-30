@@ -82,7 +82,7 @@
 
 
             <TextView
-                android:id="@+id/disciplina"
+                android:id="@+id/descricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Técnico em Manutenção e Suporte em Informática" />

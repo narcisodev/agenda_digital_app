@@ -70,7 +70,7 @@ public class Util {
             case 9:
                 return "09";
             default:
-                return hora+"";
+                return hora + "";
         }
     }
 

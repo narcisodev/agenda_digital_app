@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:visibility="visible">
+    android:visibility="visible"
+    android:paddingBottom="4dp"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:id="@+id/linearLayout5"
@@ -14,7 +16,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/circlebackgroundgreen"
+        android:background="@drawable/circlebackaa"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -24,10 +26,14 @@
             android:layout_gravity="center"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_disciplina" />
+            <TextView
+                android:id="@+id/letra_inicial"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="O"
+                android:textAlignment="center"
+                android:textColor="#fff"
+                android:textSize="18dp" />
 
 
         </LinearLayout>
@@ -44,7 +50,8 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="Manutenção de Computadores"
+        android:singleLine="true"
+        android:text="Os alunos estavam brigando e foram expulss da sala de aula..."
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
@@ -52,46 +59,51 @@
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/curso"
+        android:id="@+id/alunos"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="21dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Técnico em Manutenção e Suporte em Informática"
-        app:layout_constraintBottom_toBottomOf="@+id/linearLayout5"
-        app:layout_constraintEnd_toEndOf="@+id/descricao"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:singleLine="true"
+        android:text="Narciso Gomes, Mauro da Silva Pinto, Gustavo da SIlva "
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
         app:layout_constraintTop_toBottomOf="@+id/descricao" />
 
     <TextView
-        android:id="@+id/turma"
+        android:id="@+id/data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:text="2017.1"
-        app:layout_constraintEnd_toEndOf="@+id/curso"
+        android:text="Dia 20/04/2019 às 14:00"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/curso" />
+        app:layout_constraintTop_toBottomOf="@+id/alunos" />
 
     <TextView
-
-        android:id="@+id/qtdatividade"
+        android:id="@+id/registradopor"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
-        android:text="20 tarefas cadastradas"
+        android:layout_marginBottom="8dp"
+        android:text="Registrado por Juliana Gomes"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/linearLayout5"
-        app:layout_constraintTop_toBottomOf="@+id/turma" />
+        app:layout_constraintTop_toBottomOf="@+id/data" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/id_occ"
+        android:visibility="gone"/>
 
 </android.support.constraint.ConstraintLayout>
