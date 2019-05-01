@@ -43,6 +43,6 @@
         app:layout_anchor="@id/app_bar"
         android:background="@color/green"
         app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@drawable/ic_add_tarefa_aluno" />
+        app:srcCompat="@drawable/ic_autorenew_white_24dp" />
 
 </android.support.design.widget.CoordinatorLayout>

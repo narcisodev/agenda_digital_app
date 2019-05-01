@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class ListViewAdapterOcorrenciasAlunos extends BaseAdapter {
+public class ListViewAdapterOcorrencias2 extends BaseAdapter {
 
     Context mContext;
     LayoutInflater inflater;
     List<Ocorrencia> modellist = new ArrayList<>();
     ArrayList<Ocorrencia> arrayList = new ArrayList<>();
 
-    public ListViewAdapterOcorrenciasAlunos(){
+    public ListViewAdapterOcorrencias2(){
 
     }
 
-    public ListViewAdapterOcorrenciasAlunos(Context mContext, List<Ocorrencia> modellist) {
+    public ListViewAdapterOcorrencias2(Context mContext, List<Ocorrencia> modellist) {
         this.mContext = mContext;
         this.modellist = modellist;
         inflater = LayoutInflater.from(mContext);
@@ -36,7 +36,7 @@ public class ListViewAdapterOcorrenciasAlunos extends BaseAdapter {
     }
 
     public class ViewHolder{
-        TextView id_occ, ocorrencia, data, letra_inicial;
+        TextView descricao, alunos, data, registrado_por, letra_inicial, id_occ;
     }
 
     @Override
@@ -59,25 +59,27 @@ public class ListViewAdapterOcorrenciasAlunos extends BaseAdapter {
         ViewHolder holder;
 
         if(convertView == null){
-            holder = new ListViewAdapterOcorrenciasAlunos.ViewHolder();
-            convertView = inflater.inflate(R.layout.ped_modelo_lista_occ_aluno, null);
-            holder.id_occ = convertView.findViewById(R.id.id_occ);
-            holder.ocorrencia = convertView.findViewById(R.id.ocorrencia);
+            holder = new ListViewAdapterOcorrencias2.ViewHolder();
+            convertView = inflater.inflate(R.layout.ped_lista_ocorrencia_model_2, null);
+            holder.descricao = convertView.findViewById(R.id.descricao);
             holder.data = convertView.findViewById(R.id.data);
-            holder.letra_inicial = convertView.findViewById(R.id.letra_inicial);
+            holder.alunos = convertView.findViewById(R.id.alunos);
+            holder.registrado_por = convertView.findViewById(R.id.registradopor);
+            holder.letra_inicial=convertView.findViewById(R.id.letra_inicial);
+            holder.id_occ = convertView.findViewById(R.id.id_occ);
+            holder.registrado_por.setText(modellist.get(position).getPedagogico_nome());
+            char li = modellist.get(position).getDescricao().charAt(0);
+            holder.letra_inicial.setText(li+"");
+            holder.id_occ.setText(modellist.get(position).getId()+"");
             convertView.setTag(holder);
         }else{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.id_occ.setText(modellist.get(position).getId()+"");
-        holder.ocorrencia.setText(modellist.get(position).getDescricao());
+        holder.descricao.setText(modellist.get(position).getDescricao()+"");
         holder.data.setText(modellist.get(position).getData());
-
-
-        char nome_i= modellist.get(position).getDescricao().charAt(0);
-        holder.letra_inicial.setText(nome_i+"");
-
+        holder.alunos.setText(modellist.get(position).getNome_al());
+        holder.registrado_por.setText(modellist.get(position).getPedagogico_nome());
 
         convertView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +107,16 @@ public class ListViewAdapterOcorrenciasAlunos extends BaseAdapter {
                     modellist.add(ocorrencia);
                 }
 
+
+
                 if(ocorrencia.getData().toLowerCase(Locale.getDefault()).contains(charText)){
                     modellist.add(ocorrencia);
                 }
+
+                if((ocorrencia.getPedagogico_nome()).toLowerCase(Locale.getDefault()).contains(charText)){
+                    modellist.add(ocorrencia);
+                }
+
 
                 if(ocorrencia.getNome_al().toLowerCase(Locale.getDefault()).contains(charText)){
                     modellist.add(ocorrencia);
@@ -116,9 +125,14 @@ public class ListViewAdapterOcorrenciasAlunos extends BaseAdapter {
                 if((ocorrencia.getId()+"").toLowerCase(Locale.getDefault()).contains(charText)){
                     modellist.add(ocorrencia);
                 }
+
+
+
+
             }
         }
 
         notifyDataSetChanged();
     }
 }
+

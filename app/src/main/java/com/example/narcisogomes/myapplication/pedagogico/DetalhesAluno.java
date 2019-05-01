@@ -1,6 +1,7 @@
 package com.example.narcisogomes.myapplication.pedagogico;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -62,6 +63,8 @@ public class DetalhesAluno extends AppCompatActivity {
                 new BuscarDetalhesAluno().execute();
             }
         });
+
+
 
         new BuscarDetalhesAluno().execute();
     }

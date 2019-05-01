@@ -204,7 +204,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/descricao"
+                            android:id="@+id/curso"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
 

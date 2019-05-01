@@ -6,7 +6,7 @@ import java.util.Map;
 
 public class Values {
     //DADOS GERAIS USADOS PARA AS CONFIGURAÇÕES DO APKp00ly
-    public static final String URL_SERVICE = "http://192.168.43.220:8080/proj/adservice/solicita.php";
+    public static final String URL_SERVICE = "http://192.168.220.104:8080/proj/adservice/solicita.php";
     public static Usuario usuario = new Usuario();//guarda os dados do usuário logado para todos as activity de acesso
     public static String TAG = "N22";
     public static Responsavel responsavel = new Responsavel();
@@ -19,4 +19,8 @@ public class Values {
     public static String nome_disciplina_prof;//idem de cima
     public static int id_atividade_lista_atv_prof;
     public static boolean is_menu_desc_atv = true;
+
+
+    //AÇÕES WEBSERVICE
+    public static int SEARCH_TASK = 21;
 }

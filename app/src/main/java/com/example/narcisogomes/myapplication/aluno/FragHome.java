@@ -46,7 +46,7 @@ public class FragHome extends Fragment {
         txt_login = view.findViewById(R.id.login);
         txt_responsavel = view.findViewById(R.id.responsavel);
         txt_matricula = view.findViewById(R.id.matricula);
-        txt_curso = view.findViewById(R.id.disciplina);
+        txt_curso = view.findViewById(R.id.curso);
         txt_turma = view.findViewById(R.id.turma);
         atividade_1 = view.findViewById(R.id.atividade_1);
         atividade_2 = view.findViewById(R.id.atividade_2);

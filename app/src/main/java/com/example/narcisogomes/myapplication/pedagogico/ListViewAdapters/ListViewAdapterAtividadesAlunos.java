@@ -1,24 +1,38 @@
 package com.example.narcisogomes.myapplication.pedagogico.ListViewAdapters;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.narcisogomes.myapplication.R;
 import com.example.narcisogomes.myapplication.models.Atividade;
+import com.example.narcisogomes.myapplication.models.Professor;
+import com.example.narcisogomes.myapplication.pedagogico.DescricaoAtividade;
+import com.example.narcisogomes.myapplication.pedagogico.ListaProfessores;
+import com.example.narcisogomes.myapplication.pedagogico.Values_pedagogico;
 import com.example.narcisogomes.myapplication.professor.TelaDescAtv;
 import com.example.narcisogomes.myapplication.professor.Values_professor;
+import com.example.narcisogomes.myapplication.util.RequisicaoPost;
+import com.example.narcisogomes.myapplication.util.Values;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public class ListViewAdapterAtividadesAlunos extends BaseAdapter {
-
+    int id_atv;
     Context mContext;
     LayoutInflater inflater;
     List<Atividade> modellist;
@@ -83,14 +97,8 @@ public class ListViewAdapterAtividadesAlunos extends BaseAdapter {
             public void onClick(View v) {
                 TextView t = v.findViewById(R.id.id_atv);
                 String id_s = t.getText().toString();
-                int id = Integer.parseInt(id_s);
-                for(Atividade a: modellist){
-                    if(a.id_atividade == id){
-                        Values_professor.atividade_obj = a;
-                        mContext.startActivity(new Intent(mContext, TelaDescAtv.class));
-                        break;
-                    }
-                }
+                id_atv = Integer.parseInt(id_s);
+                new BuscaAtividade().execute();
             }
         });
         return convertView;
@@ -110,5 +118,74 @@ public class ListViewAdapterAtividadesAlunos extends BaseAdapter {
         }
 
         notifyDataSetChanged();
+    }
+
+
+
+
+
+
+
+
+    /**
+     * Buscar a atividade da lista
+     * */
+
+    private class BuscaAtividade extends AsyncTask<Void, Void, String> {
+        private ProgressDialog dialog;
+
+        @Override
+        protected void onPreExecute() {
+            dialog = new ProgressDialog(mContext);
+            dialog.setTitle(R.string.carregando);
+            dialog.setMessage("Estamos carregando a sua requisição...");
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(Void... voids) {
+            String ab="";
+            try {
+                ab = RequisicaoPost.sendPost(Values.URL_SERVICE,"acao="+Values.SEARCH_TASK+"&id_atividade="+id_atv);
+                Log.e("NARCISO222", ab);
+            } catch (Exception e) {
+                Toast.makeText(mContext, "Erro: " + e.getMessage(), Toast.LENGTH_LONG).show();
+            }
+
+            return ab;
+        }
+
+        @Override
+        protected void onPostExecute(String strings) {
+
+            String responsebody = strings;
+            JSONObject objeto = null;
+            try {
+                objeto = new JSONObject(responsebody);
+                boolean is = objeto.getBoolean("success");
+                if(is){
+                    JSONObject atividade = objeto.getJSONObject("dados");
+                    Atividade a  = new Atividade();
+                    a.descricao = atividade.getString("descricao");
+                    a.titulo = atividade.getString("titulo");
+                    a.pontos = atividade.getString("pontos");
+                    a.datacriacao = atividade.getString("datacriacao");
+                    a.data = atividade.getString("data");
+                    a.data_entrega = atividade.getString("dataentrega");
+                    a.disiciplina = atividade.getString("disciplina");
+                    a.curso = atividade.getString("curso");
+                    a.turma = atividade.getString("turma");
+                    Values_professor.atividade_obj = a;
+                    mContext.startActivity(new Intent(mContext, TelaDescAtv.class));
+                }else{
+                    Toast.makeText(mContext, "Não conseguimos buscar as iformações necessárias", Toast.LENGTH_LONG).show();
+                }
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            dialog.hide();
+        }
     }
 }

@@ -57,7 +57,7 @@ public class ListViewDisciplinasProfessor extends BaseAdapter {
             convertView = inflater.inflate(R.layout.ped_lista_disciplinas_modelo, null);
             holder.disciplina = convertView.findViewById(R.id.disciplina);
             holder.turma = convertView.findViewById(R.id.turma);
-            holder.curso = convertView.findViewById(R.id.disciplina);
+            holder.curso = convertView.findViewById(R.id.curso);
             holder.qtdatividades = convertView.findViewById(R.id.qtdatividade);
             convertView.setTag(holder);
         } else {

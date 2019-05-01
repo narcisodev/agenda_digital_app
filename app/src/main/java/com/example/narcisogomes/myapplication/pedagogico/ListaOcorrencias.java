@@ -40,7 +40,7 @@ public class ListaOcorrencias extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ped_activity_lista_ocorrencias);
-        lista = findViewById(R.layout.activity_list_item);
+        lista = findViewById(R.id.lista_ocorrencias);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//Mostra o botão
         getSupportActionBar().setHomeButtonEnabled(true);//Ativa o botão
         getSupportActionBar().setTitle("Listagem de ocorrências");
@@ -143,7 +143,6 @@ public class ListaOcorrencias extends AppCompatActivity {
             dialog = new ProgressDialog(ListaOcorrencias.this);
             dialog.setTitle(R.string.carregando);
             dialog.setMessage("Estamos carregando a sua requisição...");
-            dialog.setCancelable(false);
             dialog.show();
         }
 

@@ -81,7 +81,7 @@
         android:visibility="gone"/>
 
     <TextView
-        android:id="@+id/descricao"
+        android:id="@+id/disciplina"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
